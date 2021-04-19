@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block 'conteudo' %}
+<div class="col-12">
+    <a  href="{% url 'listajogos' %}">
+        <img src="/media/media/capas/animecapa.png">
+    </a>
+    <a  href="">
+        <img src="/media/media/capas/capafilmes.png">
+    </a>
+    <a  href="">
+        <img src="/media/media/capas/capajogos.png">
+    </a>
+    <a  href="">
+        <img src="/media/media/capas/capaseries.png">
+    </a>
+</div>
+Você está logado como: {{user}}
+{% endblock %}

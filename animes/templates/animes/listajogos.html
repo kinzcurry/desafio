@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block 'conteudo' %}
+
+<div class="col-12">
+    <div class="row">
+        <a  href="{% url 'animefase1' %}">
+            <img class="imagem" src="/media/media/capas/1.png">
+        </a>
+        <span class="placar"> {{pontuacao}} /25 </span>
+
+
+        {% if pontuacao >= 20 %}
+        <a href="">
+            <img class="imagem" src="/media/media/capas/2aberto.png" width="450" height="300">
+        </a>
+        {% else %}
+            <img class="imagem" src="/media/media/capas/2fechado.png" width="450" height="300">
+        {% endif %}
+        <div>
+          <span class="placar"> {{pontuacao}} /50</span>
+        </div>
+
+
+        {% if pontuacao >= 40 %}
+        <a href="">
+            <img class="imagem" src="/media/media/capas/3aberto.png" width="450" height="300">
+        </a>
+        {% else %}
+        <img class="imagem" src="/media/media/capas/3fechado.png" width="450" height="300">
+        {% endif %}
+        <span class="placar"> {{pontuacao}} /75</span>
+
+
+        {% if pontuacao >= 60 %}
+        <a href="">
+            <img class="imagem" src="/media/media/capas/4aberto.png" width="450" height="300">
+        </a>
+        {% else %}
+        <img class="imagem" src="/media/media/capas/4fechado.png" width="450" height="300">
+        {% endif %}
+        <span class="placar"> {{pontuacao}} /100</span>
+    </div>
+</div>
+
+{% endblock%}

@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block 'conteudo' %}
+<link rel="stylesheet" href="{% static 'css/player.css' %}">
+<h1>{{pontuacao}} / 25 </h1>
+<a href="{% url 'logout' %}">Logout</a>
+<div class="row">
+    {% for music in musicas %}
+    <div class="col-lg-1.5">
+        <br>
+        <div class="card teste" >
+            {% for lis in lista %}
+            {% if music == lis.respostas_lista %}
+            {% if lis.acertou %}
+                <img class="card-img-top" src="{{music.imagem.url}}" width="150" height="150" id="fotoanime">
+            {% else %}
+                <img class="card-img-top" src="/media/media/controle.png" width="150" height="150" id="foto">
+            {% endif %}
+            <div class="card-body">
+                <audio controls id="controller">
+                    <source src="{{ music.musica.url }}" type="audio/mp3">
+                </audio>
+                <form action="{% url 'validar' lis.id %}" method="get" >
+                    <input type="text" class="form-control" name="escrito" id="inputnome" >
+                    <button type="submit" class="btn bouncy" id="btnnome">Validar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    {% endfor %}
+    {% endfor %}
+</div>
+Você está logado como: {{user}}
+{% endblock %}

@@ -1,0 +1,21 @@
+@login_required(redirect_field_name='login')
+def index(request):
+    musicas = Musica.objects.filter().all()
+    return render(request, 'musicas/index.html', {'musicas': musicas})
+
+@login_required(redirect_field_name='login')
+def validar(request, musica_id):
+    musicas = get_object_or_404(Musica, id=musica_id)
+    texto = request.GET.get('escrito')
+
+    if musicas.nome == texto:
+        musicas.acertou = True
+        musicas.save()
+        return redirect('index')
+    else:
+        musicas.acertou = False
+        musicas.save()
+        return redirect('index')
+
+
+background: linear-gradient(to right, rgba(0, 125, 181, 0.6) 30%, rgba(0, 125, 181, 0.2) 50%);

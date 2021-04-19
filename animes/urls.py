@@ -1,0 +1,12 @@
+from django.conf import settings
+from django.conf.urls.static import static
+from django.contrib import admin
+from django.urls import path, include
+from . import views
+
+
+urlpatterns = [
+    path('', views.listajogos, name='listajogos'),
+    path('animefase1/', views.animefase1, name='animefase1'),
+    path('<int:musica_id>/', views.validar, name='validar'),
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
