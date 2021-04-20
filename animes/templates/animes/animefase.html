@@ -2,13 +2,14 @@
 {% load static %}
 {% block 'conteudo' %}
 <link rel="stylesheet" href="{% static 'css/player.css' %}">
-<h1>{{pontuacao}} / 25 </h1>
+
+<h1> {{pontuacao}} / 25 </h1>
 <a href="{% url 'logout' %}">Logout</a>
 <div class="row">
     {% for music in musicas %}
     <div class="col-lg-1.5">
         <br>
-        <div class="card teste" >
+        <div class="card teste">
             {% for lis in lista %}
             {% if music == lis.respostas_lista %}
             {% if lis.acertou %}
@@ -20,10 +21,19 @@
                 <audio controls id="controller">
                     <source src="{{ music.musica.url }}" type="audio/mp3">
                 </audio>
+                {% if lis.acertou %}
+                    <button class="congrats"> {{music}} </button>
+                {% if lis.id == focar %}
+                    <button id="focado" autofocus></button>
+                    {% endif %}
+                {% else %}
                 <form action="{% url 'validar' lis.id %}" method="get" >
                     <input type="text" class="form-control" name="escrito" id="inputnome" >
                     <button type="submit" class="btn bouncy" id="btnnome">Validar</button>
+
                 </form>
+                {% endif %}
+
             </div>
         </div>
     </div>
@@ -31,5 +41,8 @@
     {% endfor %}
     {% endfor %}
 </div>
-Você está logado como: {{user}}
+    Você está logado como: {{user}}
+<script src="{% static 'js/focus.js' %}"></script>
+
 {% endblock %}
+

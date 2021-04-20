@@ -41,11 +41,10 @@ body{
 
 }
 
-
 .card {
       border-radius: 20px;
-      width: 350px;
-      height: 300px;
+      width: 9%;
+      height: 30%;
       position: relative;
       box-shadow:6px 6px 15px rgba(51,51,51,0.5);
       overflow:hidden;
@@ -86,4 +85,12 @@ position:relative;
 48%{top:-0.4em}
 50%{top:0em}
 100%{top:0em;}
+}
+
+#congrats {
+    position: relative;
+    width: 100%;
+    font-size: 80px;
+    color: white;
+    background-color: #3b4148;
 }
