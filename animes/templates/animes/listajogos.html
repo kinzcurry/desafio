@@ -10,7 +10,7 @@
         </a>
         <span class="placar"> {{pontuacao}} /25 </span>
 
-        {% if pontuacao >= 20 %}
+        {% if pontuacao >= 15 %}
         <a href="{% url 'animefase' num='2' %}">
             <img class="imagem" src="/media/media/capas/2aberto.png" width="450" height="300">
         </a>
@@ -21,7 +21,7 @@
           <span class="placar"> {{pontuacao}} /50</span>
         </div>
 
-        {% if pontuacao >= 40 %}
+        {% if pontuacao >= 30 %}
         <a href="{% url 'animefase' num='3' %}">
             <img class="imagem" src="/media/media/capas/3aberto.png" width="450" height="300">
         </a>
@@ -30,7 +30,7 @@
         {% endif %}
         <span class="placar"> {{pontuacao}} /75</span>
 
-        {% if pontuacao >= 60 %}
+        {% if pontuacao >= 45 %}
         <a href="{% url 'animefase' num='4' %}">
             <img class="imagem" src="/media/media/capas/4aberto.png" width="450" height="300">
         </a>

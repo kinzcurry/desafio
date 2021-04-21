@@ -3,6 +3,9 @@ from django.contrib.auth.models import User
 # Create your models here.
 class Musica(models.Model):
     nome = models.CharField(max_length=255)
+    nome2 = models.CharField(max_length=255, blank=True)
+    nome3 = models.CharField(max_length=255, blank=True)
+    nome4 = models.CharField(max_length=255, blank=True)
     musica = models.FileField(upload_to='media/')
     imagem = models.ImageField(upload_to='media/imgs/', blank=True)
     tipo = models.CharField(max_length=255)

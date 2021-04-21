@@ -2,7 +2,6 @@
 {% load static %}
 {% block 'conteudo' %}
 <link rel="stylesheet" href="{% static 'css/player.css' %}">
-
 <h1> {{pontuacao}} / 25 </h1>
 <a href="{% url 'logout' %}">Logout</a>
 <div class="row">
@@ -23,9 +22,6 @@
                 </audio>
                 {% if lis.acertou %}
                     <button class="congrats"> {{music}} </button>
-                {% if lis.id == focar %}
-                    <button id="focado" autofocus></button>
-                    {% endif %}
                 {% else %}
                 <form action="{% url 'validar' lis.id %}" method="get" >
                     <input type="text" class="form-control" name="escrito" id="inputnome" >
