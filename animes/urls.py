@@ -7,6 +7,6 @@ from . import views
 
 urlpatterns = [
     path('', views.listajogos, name='listajogos'),
-    path('animefase/<int:num>', views.animefase, name='animefase'),
+    path('animefase/<int:num>/<int:focus>', views.animefase, name='animefase'),
     path('<int:musica_id>', views.validar, name='validar'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -2,34 +2,40 @@
 {% load static %}
 {% block 'conteudo' %}
 <link rel="stylesheet" href="{% static 'css/player.css' %}">
-<h1> {{pontuacao}} / 25 </h1>
-<a href="{% url 'logout' %}">Logout</a>
+
+
 <div class="row">
     {% for music in musicas %}
     <div class="col-lg-1.5">
         <br>
         <div class="card teste">
             {% for lis in lista %}
-            {% if music == lis.respostas_lista %}
-            {% if lis.acertou %}
-                <img class="card-img-top" src="{{music.imagem.url}}" width="150" height="150" id="fotoanime">
-            {% else %}
-                <img class="card-img-top" src="/media/media/controle.png" width="150" height="150" id="foto">
-            {% endif %}
+                {% if music == lis.respostas_lista %}
+                    {% if lis.acertou %}
+                        <img class="card-img-top" src="{{music.imagem.url}}" width="150" height="150" id="fotoanime">
+                    {% else %}
+                        <img class="card-img-top" src="/media/media/controle.png" width="150" height="150" id="foto">
+                    {% endif %}
             <div class="card-body">
                 <audio controls id="controller">
                     <source src="{{ music.musica.url }}" type="audio/mp3">
                 </audio>
                 {% if lis.acertou %}
-                    <button class="congrats"> {{music}} </button>
+                    {% if lis.id == focus %}
+                        <button class="congrats" id="focado"> {{music}} </button>
+                    {% else %}
+                        <button class="congrats"> {{music}} </button>
+                    {% endif %}
                 {% else %}
                 <form action="{% url 'validar' lis.id %}" method="get" >
-                    <input type="text" class="form-control" name="escrito" id="inputnome" >
+                    {% if lis.id == focus %}
+                        <input type="text" class="form-control" name="escrito" id="focado" >
+                    {% else %}
+                        <input type="text" class="form-control" name="escrito" id="inputnome" >
+                    {% endif %}
                     <button type="submit" class="btn bouncy" id="btnnome">Validar</button>
-
                 </form>
                 {% endif %}
-
             </div>
         </div>
     </div>
@@ -37,6 +43,7 @@
     {% endfor %}
     {% endfor %}
 </div>
+    <h1> {{pontuacao}} / 25 </h1>
     Você está logado como: {{user}}
 <script src="{% static 'js/focus.js' %}"></script>
 

@@ -1,5 +1,6 @@
 body{
     background: #606468;
+    width: 100%;
 }
 
 #foto {
@@ -38,17 +39,16 @@ body{
 }
 #controller:hover{
     transform: scale(1.05);
-
 }
 
 .card {
       border-radius: 20px;
-      width: 9%;
-      height: 30%;
+      width: 250px;
+      height: 305px;
       position: relative;
       box-shadow:6px 6px 15px rgba(51,51,51,0.5);
       overflow:hidden;
-      margin: 20px 10% 20px 10%;
+      margin: 0px 0% 0px 10%;
 }
 .teste{
     background-color: transparent;
@@ -87,10 +87,13 @@ position:relative;
 100%{top:0em;}
 }
 
-#congrats {
+.congrats{
     position: relative;
     width: 100%;
-    font-size: 80px;
+    font-size: 16px;
     color: white;
     background-color: #3b4148;
+    cursor: pointer;
+    top: 15px;
+    pointer-events: none;
 }
