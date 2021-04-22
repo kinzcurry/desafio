@@ -41,15 +41,6 @@ body{
     transform: scale(1.05);
 }
 
-.card {
-      border-radius: 20px;
-      width: 250px;
-      height: 305px;
-      position: relative;
-      box-shadow:6px 6px 15px rgba(51,51,51,0.5);
-      overflow:hidden;
-      margin: 0px 0% 0px 10%;
-}
 .teste{
     background-color: transparent;
 }
@@ -96,4 +87,9 @@ position:relative;
     cursor: pointer;
     top: 15px;
     pointer-events: none;
+}
+
+.cardnovo {
+      column-gap: 40px;
+      column-width: 100px;
 }

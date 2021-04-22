@@ -4,9 +4,9 @@
 <link rel="stylesheet" href="{% static 'css/player.css' %}">
 
 
-<div class="row">
+<div class="card-deck">
     {% for music in musicas %}
-    <div class="col-lg-1.5">
+    <div class="col-lg-1.5 ">
         <br>
         <div class="card teste">
             {% for lis in lista %}
@@ -16,7 +16,7 @@
                     {% else %}
                         <img class="card-img-top" src="/media/media/controle.png" width="150" height="150" id="foto">
                     {% endif %}
-            <div class="card-body">
+            <div class="card-body cardnovo">
                 <audio controls id="controller">
                     <source src="{{ music.musica.url }}" type="audio/mp3">
                 </audio>

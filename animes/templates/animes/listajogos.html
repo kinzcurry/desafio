@@ -11,7 +11,7 @@
         <span class="placar"> {{pontuacao}} /25 </span>
 
         {% if pontuacao >= 15 %}
-        <a href="{% url 'animefase' num='2' %}">
+        <a href="{% url 'animefase' num='2' focus='1' %}">
             <img class="imagem" src="/media/media/capas/2aberto.png" width="450" height="300">
         </a>
         {% else %}
