@@ -23,11 +23,16 @@ def animefase(request, num, focus):
     lista = UserResps.objects.filter(usuario__username__iexact=user)
     pontuacao = 0
     music = Musica.objects.filter(fase__lte=num)
+    if num == 1 or 2 or 3 or 4:
+        tema = "anime"
+
     for li in lista:
         for mu in music:
             if li.respostas_lista == mu:
-                if li.acertou:
-                    pontuacao += 1
+                if mu.tipo == tema:
+                    if mu.fase == num:
+                        if li.acertou:
+                            pontuacao += 1
     return render(request, 'animes/animefase.html', {'musicas': musicas, 'lista': lista, 'pontuacao': pontuacao, 'focus': focus})
 
 def validar(request, musica_id):

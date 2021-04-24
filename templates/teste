@@ -1,0 +1,66 @@
+body{
+    background: #A9A9A9;
+}
+
+.imagem {
+    display: column;
+    position: relative;
+    left: 250px;
+    top: 250px;
+    border: 30px;
+    width: 390px;
+    height: 260px;
+}
+.embranco{
+    color: #606468;
+}
+
+.placar{
+    display: column;
+    position: relative;
+    left: -20px;
+    top: 160px;
+    border: 30px;
+    font-size: 50px;
+    color: white;
+}
+.tamanhonav{
+    width: 100%;
+}
+.navezinha{
+    background-color: #4F4F4F;
+    color: white;
+    font-weight: bold;
+    font-size: 24px;
+    margin: 0px 50px 20px 0px;
+}
+
+<nav class="navbar navbar-expand-lg navezinha tamanhonav">
+  <a class="navbar-brand navezinha" href="{% url 'index' %}">Geekpops</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link navezinha" href="{% url 'index' %}">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle navezinha" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Jogos
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="{% url 'listajogos' %}">Animes</a>
+          <a class="dropdown-item" href="#">Filmes</a>
+          <a class="dropdown-item" href="#">Games</a>
+          <a class="dropdown-item" href="#">Séries</a>
+          <a class="dropdown-item" href="#">Desenhos</a>
+        </div>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0" action="{% url 'logout' %}">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Logout</button>
+    </form>
+  </div>
+</nav>

@@ -2,23 +2,6 @@ body{
     background: #606468;
     width: 100%;
 }
-
-#foto {
-    position: relative;
-    left: 0px;
-    top: 0px;
-    width: 300px;
-    position: relative;
-    width: 100%;
-}#fotoanime {
-    position: relative;
-    left: 0px;
-    top: 0px;
-    width: 300px;
-    position: relative;
-    width: 100%;
-}
-
 #inputnome {
     text-align:left;
     width:200px;
@@ -29,7 +12,6 @@ body{
     position: relative;
     width: 100%;
 }
-
 #controller {
     position: relative;
     width: 100%;
@@ -41,14 +23,6 @@ body{
     transform: scale(1.05);
 }
 
-.teste{
-    background-color: transparent;
-}
-
-.card:hover{
-    transform: scale(1.05);
-}
-
 #btnnome {
     position: relative;
     width: 100%;
@@ -56,13 +30,6 @@ body{
     color: white;
     background-color: #3b4148;
     cursor: pointer;
-}
-#btnnome:hover {
-    background-color: #6495ED;
-}
-
-#btnnome:active{
-    top:0.2em;
 }
 .bouncy{
 animation:bouncy 5s infinite linear;
@@ -85,11 +52,47 @@ position:relative;
     color: white;
     background-color: #3b4148;
     cursor: pointer;
-    top: 15px;
     pointer-events: none;
 }
 
-.cardnovo {
-      column-gap: 40px;
-      column-width: 100px;
+.grid{
+  display: grid;
+
+  grid-gap: 2px;
+  margin-left: 16%;
+  padding-right: 15px;
+  width: 100%;
+  grid-template-columns: 9% 9% 9% 9% 9% 9% 9% 9% 9%;
+  grid-template-rows: 3.5% 3.5% 3.5%;
 }
+.grid-item{
+  position: relative;
+  padding-left: 15px;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  padding: 0;
+  box-sizing: border-box;
+}
+.grid-item img{
+    position: relative;
+    width: 100%;
+    height: 50%;
+}
+
+.grid-item audio{
+    width: 100%;
+}
+.grid-item:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+.grid-item input{
+  width: 100%;
+  padding: 0;
+  margin-left: -3px
+}
+.grid-item button{
+  width: 100%;
+  padding: 0;
+  margin-left: -3px
+}
+

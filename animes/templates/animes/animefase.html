@@ -1,51 +1,43 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block 'conteudo' %}
-<link rel="stylesheet" href="{% static 'css/player.css' %}">
+<link rel="stylesheet" href="{% static 'css/audio.css' %}">
 
-
-<div class="card-deck">
+<div class="grid">
     {% for music in musicas %}
-    <div class="col-lg-1.5 ">
-        <br>
-        <div class="card teste">
-            {% for lis in lista %}
+    <div class="grid-item">
+      {% for lis in lista %}
                 {% if music == lis.respostas_lista %}
                     {% if lis.acertou %}
-                        <img class="card-img-top" src="{{music.imagem.url}}" width="150" height="150" id="fotoanime">
+                    <img src="{{music.imagem.url}}">
                     {% else %}
-                        <img class="card-img-top" src="/media/media/controle.png" width="150" height="150" id="foto">
+                    <img src="/media/media/controle.png">
                     {% endif %}
-            <div class="card-body cardnovo">
-                <audio controls id="controller">
+                <audio controls>
                     <source src="{{ music.musica.url }}" type="audio/mp3">
                 </audio>
-                {% if lis.acertou %}
-                    {% if lis.id == focus %}
-                        <button class="congrats" id="focado"> {{music}} </button>
-                    {% else %}
-                        <button class="congrats"> {{music}} </button>
-                    {% endif %}
-                {% else %}
                 <form action="{% url 'validar' lis.id %}" method="get" >
-                    {% if lis.id == focus %}
-                        <input type="text" class="form-control" name="escrito" id="focado" >
+                    {% if lis.acertou %}
+                        {% if lis.id == focus %}
+                            <input type="text" name="escrito" id="focado" disabled>
+                            <button class="congrats" disabled> {{music}} </button>
+                        {% else %}
+                            <input type="text" name="escrito" id="inputnome" disabled>
+                            <button class="congrats" disabled> {{music}} </button>
+                        {% endif %}
                     {% else %}
-                        <input type="text" class="form-control" name="escrito" id="inputnome" >
+                        <input type="text" name="escrito">
+                        <button class="bouncy" type="submit" id="btnnome">Validar</button>
                     {% endif %}
-                    <button type="submit" class="btn bouncy" id="btnnome">Validar</button>
                 </form>
-                {% endif %}
-            </div>
-        </div>
-    </div>
+  </div>
     {% endif %}
     {% endfor %}
-    {% endfor %}
-</div>
-    <h1> {{pontuacao}} / 25 </h1>
+{% endfor %}
+    <span class="align-middle" style="font-size: 300%; color: gold; margin: 15%;"> {{pontuacao}} / 25 </span>
     Você está logado como: {{user}}
+</div>
+
+
 <script src="{% static 'js/focus.js' %}"></script>
-
 {% endblock %}
-

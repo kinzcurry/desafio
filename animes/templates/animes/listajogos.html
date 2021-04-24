@@ -2,43 +2,54 @@
 {% load static %}
 
 {% block 'conteudo' %}
+<link rel="stylesheet" href="{% static 'css/navbar.css' %}">
 
-<div class="col-12">
-    <div class="row">
-        <a  href="{% url 'animefase' num='1' focus='1' %}">
-            <img class="imagem" src="/media/media/capas/1.png">
+<div class="grid2">
+  <div class="grid-fase">
+    <a href="{% url 'animefase' num='1' focus='1' %}">
+        <img src="/media/media/capas/1.png">
+    </a>
+    <span class="placar"> {{pontuacao}} /25 </span>
+  </div>
+    {% if pontuacao >= 15 %}
+    <div class="grid-fase">
+        <a  href="{% url 'animefase' num='2' focus='1' %}">
+            <img src="/media/media/capas/2aberto.png">
         </a>
         <span class="placar"> {{pontuacao}} /25 </span>
-
-        {% if pontuacao >= 15 %}
-        <a href="{% url 'animefase' num='2' focus='1' %}">
-            <img class="imagem" src="/media/media/capas/2aberto.png" width="450" height="300">
-        </a>
-        {% else %}
-            <img class="imagem" src="/media/media/capas/2fechado.png" width="450" height="300">
-        {% endif %}
-        <div>
-          <span class="placar"> {{pontuacao}} /50</span>
-        </div>
-
-        {% if pontuacao >= 30 %}
-        <a href="{% url 'animefase' num='3' %}">
-            <img class="imagem" src="/media/media/capas/3aberto.png" width="450" height="300">
-        </a>
-        {% else %}
-        <img class="imagem" src="/media/media/capas/3fechado.png" width="450" height="300">
-        {% endif %}
-        <span class="placar"> {{pontuacao}} /75</span>
-
-        {% if pontuacao >= 45 %}
-        <a href="{% url 'animefase' num='4' %}">
-            <img class="imagem" src="/media/media/capas/4aberto.png" width="450" height="300">
-        </a>
-        {% else %}
-        <img class="imagem" src="/media/media/capas/4fechado.png" width="450" height="300">
-        {% endif %}
-        <span class="placar"> {{pontuacao}} /100</span>
+  </div>
+    {% else %}
+    <div class="grid-fase">
+        <img src="/media/media/capas/2fechado.png">
+        <span class="placar"> {{pontuacao}} /25 </span>
     </div>
+    {% endif %}
+    {% if pontuacao >= 30 %}
+    <div class="grid-fase">
+        <a  href="{% url 'animefase' num='3' focus='1' %}">
+            <img src="/media/media/capas/3aberto.png">
+        </a>
+        <span class="placar"> {{pontuacao}} /25 </span>
+  </div>
+    {% else %}
+    <div class="grid-fase">
+        <img src="/media/media/capas/3fechado.png">
+        <span class="placar"> {{pontuacao}} /25 </span>
+    </div>
+    {% endif %}
+    {% if pontuacao >= 45 %}
+    <div class="grid-fase">
+        <a  href="{% url 'animefase' num='4' focus='1' %}">
+            <img src="/media/media/capas/4aberto.png">
+        </a>
+        <span class="placar"> {{pontuacao}} /25 </span>
+  </div>
+    {% else %}
+    <div class="grid-fase">
+        <img src="/media/media/capas/4fechado.png">
+        <span class="placar"> {{pontuacao}} /25 </span>
+    </div>
+    {% endif %}
 </div>
 
 {% endblock%}
