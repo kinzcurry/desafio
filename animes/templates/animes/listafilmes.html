@@ -6,47 +6,47 @@
 
 <div class="separador2">
   <div class="grid-fase">
-    <a href="{% url 'animefase' num='1' focus='1' %}">
-        <img src="/media/media/capas/1.png">
+    <a href="{% url 'animefase' num='5' focus='1' %}">
+        <img  src="/media/media/capas/filme1ab.jpg">
     </a>
     <span class="placar"> {{pontuacao}} /25 </span>
   </div>
     {% if pontuacao >= 15 %}
     <div class="grid-fase">
-        <a href="{% url 'animefase' num='2' focus='1' %}">
-            <img src="/media/media/capas/2aberto.png">
+        <a  href="{% url 'animefase' num='6' focus='1' %}">
+            <img  src="/media/media/capas/filme2ab.jpg">
         </a>
         <span class="placar"> {{pontuacao}} /25 </span>
   </div>
     {% else %}
     <div class="grid-fase">
-        <img src="/media/media/capas/2fechado.png">
+        <img src="/media/media/capas/filme2fe.jpg">
         <span class="placar"> {{pontuacao}} /25 </span>
     </div>
     {% endif %}
     {% if pontuacao >= 30 %}
     <div class="grid-fase">
-        <a  href="{% url 'animefase' num='3' focus='1' %}">
-            <img src="/media/media/capas/3aberto.png">
+        <a  href="{% url 'animefase' num='7' focus='1' %}">
+            <img src="/media/media/capas/filme3ab.jpg">
         </a>
         <span class="placar"> {{pontuacao}} /25 </span>
   </div>
     {% else %}
     <div class="grid-fase">
-        <img src="/media/media/capas/3fechado.png">
+        <img src="/media/media/capas/filme3fe.jpg">
         <span class="placar"> {{pontuacao}} /25 </span>
     </div>
     {% endif %}
     {% if pontuacao >= 45 %}
     <div class="grid-fase">
-        <a  href="{% url 'animefase' num='4' focus='1' %}">
-            <img src="/media/media/capas/4aberto.png">
+        <a  href="{% url 'animefase' num='8' focus='1' %}">
+            <img src="/media/media/capas/filme4ab.jpg">
         </a>
         <span class="placar"> {{pontuacao}} /25 </span>
   </div>
     {% else %}
     <div class="grid-fase">
-        <img src="/media/media/capas/4fechado.png">
+        <img src="/media/media/capas/filme4fe.jpg">
         <span class="placar"> {{pontuacao}} /25 </span>
     </div>
     {% endif %}

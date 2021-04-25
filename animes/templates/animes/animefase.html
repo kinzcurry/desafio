@@ -19,22 +19,23 @@
                 <form action="{% url 'validar' lis.id %}" method="get" >
                     {% if lis.acertou %}
                         {% if lis.id == focus %}
-                            <input type="text" name="escrito" id="focado" disabled>
-                            <button class="congrats" disabled> {{music}} </button>
+                            <input type="text" name="escrito" id="" disabled placeholder="{{music}}">
+<!--                            <button class="congrats" disabled> Validar </button>-->
                         {% else %}
-                            <input type="text" name="escrito" id="inputnome" disabled>
-                            <button class="congrats" disabled> {{music}} </button>
+                            <input type="text" name="escrito" id="inputnome" placeholder="{{music}}" disabled>
+<!--                            <button class="congrats" disabled> Validar </button>-->
                         {% endif %}
                     {% else %}
                         <input type="text" name="escrito">
                         <button class="bouncy" type="submit" id="btnnome">Validar</button>
                     {% endif %}
                 </form>
+            {% endif %}
+      {% endfor %}
+
   </div>
-    {% endif %}
     {% endfor %}
-{% endfor %}
-    <span class="align-middle" style="font-size: 300%; color: gold; margin: 15%;"> {{pontuacao}} / 25 </span>
+<span class="align-middle" style="font-size: 300%; color: gold; margin: 15%;"> {{pontuacao}} / 25 </span>
     Você está logado como: {{user}}
 </div>
 

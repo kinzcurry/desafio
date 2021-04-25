@@ -64,15 +64,6 @@ def register(request):
     print('registrado com sucesso')
     user = User.objects.create_user(username=usuario, email=email, password=senha, first_name=nome)
     user.save()
-
-    musica = Musica.objects.filter().all()
-    cont = 0
-    while cont < len(musica):
-        resp = UserResps(usuario=user, respostas_lista=musica[cont], acertou=False)
-        resp.save()
-        cont += 1
-
-    print(UserResps.objects.filter(usuario__username__iexact=user))
     return redirect('login')
 
 def logout(request):

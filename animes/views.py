@@ -6,15 +6,48 @@ from musicas.models import Musica
 from musicas.models import UserResps
 from django.contrib import auth
 # Create your views here.
+
+def criarbd(request, tipolista):
+    user = auth.get_user(request)
+    musica = Musica.objects.filter(tipo=tipolista)
+    cont = 0
+    while cont < len(musica):
+        resp = UserResps(usuario=user, respostas_lista=musica[cont], acertou=False)
+        resp.save()
+        cont += 1
+
+
 @login_required(redirect_field_name='login')
 def listajogos(request):
     user = auth.get_user(request)
     lista = UserResps.objects.filter(usuario__username__iexact=user)
     pontuacao = 0
+    cont = 0
     for li in lista:
-        if li.acertou:
-            pontuacao += 1
+        if li.respostas_lista.tipo == 'anime':
+            cont += 1
+            if li.acertou:
+                pontuacao += 1
+    if cont == 0:
+        tipolista = 'anime'
+        criarbd(request, tipolista)
     return render(request, 'animes/listajogos.html', {'pontuacao': pontuacao})
+
+@login_required(redirect_field_name='login')
+def listafilmes(request):
+    user = auth.get_user(request)
+    lista = UserResps.objects.filter(usuario__username__iexact=user)
+    pontuacao = 0
+    cont = 0
+    for li in lista:
+        if li.respostas_lista.tipo == 'filme':
+            cont += 1
+            if li.acertou:
+                pontuacao += 1
+    if cont == 0:
+        tipolista = 'filme'
+        criarbd(request, tipolista)
+    return render(request, 'animes/listafilmes.html', {'pontuacao': pontuacao})
 
 @login_required(redirect_field_name='login')
 def animefase(request, num, focus):

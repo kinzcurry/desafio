@@ -112,37 +112,15 @@ li a:hover {
   width: 100%;
 }
 
-.grid{
-  display: grid;
-  grid-gap: 2px;
-  grid-column-start: 1;
-  grid-column-end: 6;
-  margin-left: 10%;
-  width: 100%;
-  grid-template-columns: 9% 9% 9% 9% 9% 9% 9% 9% 9%;
-  grid-template-rows: 33% 33% 33%;
+.separador2{
+    display: grid;
+    grid-gap: 2px;
+    margin-left: 25%;
+    width: 100%;
+    grid-template-columns: 40% 40%;
+    grid-template-rows: 50% 50%;
+}
 
-}
-.grid-item{
-  position: relative;
-  padding-left: 5px;
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-  transition: 0.3s;
-  box-sizing: border-box;
-}
-.grid-item:hover {
-  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-}
-.grid-item input{
-  width: 100%;
-  padding: 0;
-  margin-left: -3px
-}
-.grid-item button{
-  width: 104%;
-  padding: 0;
-  margin-left: -3px
-}
 .grid-fase{
     position: relative;
     padding-left: 5px;
@@ -155,12 +133,3 @@ li a:hover {
     margin-top: 1%;
 
 }
-.grid2{
-    display: grid;
-    grid-gap: 2px;
-    margin-left: 25%;
-    width: 100%;
-    grid-template-columns: 40% 40%;
-    grid-template-rows: 50% 50%;
-}
-

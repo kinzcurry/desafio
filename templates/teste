@@ -1,66 +1,51 @@
-body{
-    background: #A9A9A9;
-}
+.separador{
+  display: grid;
+  grid-gap: 2px;
+  grid-column-start: 1;
+  grid-column-end: 6;
+  margin-left: 10%;
+  width: 100%;
+  grid-template-columns: 9% 9% 9% 9% 9% 9% 9% 9% 9%;
+  grid-template-rows: 33% 33% 33%;
 
-.imagem {
-    display: column;
+}
+.item-separador{
+  position: relative;
+  padding-left: 5px;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  box-sizing: border-box;
+}
+.item-separador:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+.item-separador input{
+  width: 100%;
+  padding: 0;
+  margin-left: -3px
+}
+.item-separador button{
+  width: 104%;
+  padding: 0;
+  margin-left: -3px
+}
+.grid-fase{
     position: relative;
-    left: 250px;
-    top: 250px;
-    border: 30px;
-    width: 390px;
-    height: 260px;
+    padding-left: 5px;
+    transition: 0.3s;
+    box-sizing: border-box;
 }
-.embranco{
-    color: #606468;
-}
+.grid-fase img{
+    position: relative;
+    width: 50%;
+    margin-top: 1%;
 
-.placar{
-    display: column;
-    position: relative;
-    left: -20px;
-    top: 160px;
-    border: 30px;
-    font-size: 50px;
-    color: white;
 }
-.tamanhonav{
+.separador2{
+    display: grid;
+    grid-gap: 2px;
+    margin-left: 25%;
     width: 100%;
+    grid-template-columns: 40% 40%;
+    grid-template-rows: 50% 50%;
 }
-.navezinha{
-    background-color: #4F4F4F;
-    color: white;
-    font-weight: bold;
-    font-size: 24px;
-    margin: 0px 50px 20px 0px;
-}
-
-<nav class="navbar navbar-expand-lg navezinha tamanhonav">
-  <a class="navbar-brand navezinha" href="{% url 'index' %}">Geekpops</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link navezinha" href="{% url 'index' %}">Home <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle navezinha" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Jogos
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="{% url 'listajogos' %}">Animes</a>
-          <a class="dropdown-item" href="#">Filmes</a>
-          <a class="dropdown-item" href="#">Games</a>
-          <a class="dropdown-item" href="#">Séries</a>
-          <a class="dropdown-item" href="#">Desenhos</a>
-        </div>
-      </li>
-    </ul>
-    <form class="form-inline my-2 my-lg-0" action="{% url 'logout' %}">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Logout</button>
-    </form>
-  </div>
-</nav>
