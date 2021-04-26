@@ -7,6 +7,7 @@ from musicas.models import UserResps
 from django.contrib import auth
 # Create your views here.
 
+# Cria o banco de dados do usuario quando ele clicar em jogar naquele tema
 def criarbd(request, tipolista):
     user = auth.get_user(request)
     musica = Musica.objects.filter(tipo=tipolista)
@@ -17,6 +18,7 @@ def criarbd(request, tipolista):
         cont += 1
 
 
+# Lista os 4 niveis do jogo dos animes
 @login_required(redirect_field_name='login')
 def listajogos(request):
     user = auth.get_user(request)
@@ -33,6 +35,8 @@ def listajogos(request):
         criarbd(request, tipolista)
     return render(request, 'animes/listajogos.html', {'pontuacao': pontuacao})
 
+
+# Lista os 4 niveis do jogo dos filmes
 @login_required(redirect_field_name='login')
 def listafilmes(request):
     user = auth.get_user(request)
@@ -49,25 +53,96 @@ def listafilmes(request):
         criarbd(request, tipolista)
     return render(request, 'animes/listafilmes.html', {'pontuacao': pontuacao})
 
+
+# Acha o tema escolhido pelo jogador
+def achartema(request, num):
+    if num <= 4:
+        tema = "anime"
+    elif num > 4:
+        if num <= 8:
+            tema = "filme"
+
+    return tema
+
+
+# Define a proxima fase e a anterior
+def valfase(request, tema, num):
+    ante = 0
+    prox = 0
+    if tema == "anime":
+        if num == 1:
+            ante = 1
+            prox = num + 1
+        elif num == 4:
+            prox = 4
+            ante = num - 1
+        else:
+            ante = num - 1
+            prox = num + 1
+
+    elif tema == "filme":
+        if num == 5:
+            ante = 5
+            prox = num + 1
+        elif num == 8:
+            ante = num - 1
+            prox = 8
+        else:
+            ante = num - 1
+            prox = num + 1
+
+    return ante, prox
+
+
+# Calcula os pontos do jogador
+def pontosjogador(request, num, tema):
+    user = auth.get_user(request)
+    lista = UserResps.objects.filter(usuario__username__iexact=user)
+    pontofase = 0
+    pontotema = 0
+    for li in lista:
+        if li.respostas_lista.tipo == tema:
+            if li.acertou:
+                pontotema += 1
+                if li.respostas_lista.fase == num:
+                    pontofase += 1
+    return pontotema, pontofase
+
+
+# Calcula se o jogador pode ir pra proxima fase
+def proxfase(request, pontotema, num):
+    podepassar = False
+    if pontotema >= 45:
+        podepassar = True
+        return podepassar
+    elif pontotema >= 30:
+        if num == 1 or num == 2 or num == 5 or num == 6:
+            podepassar = True
+            return podepassar
+    elif pontotema >= 15:
+        if num == 1 or num == 5:
+            podepassar = True
+            return podepassar
+    else:
+        return podepassar
+
+
+# Gera a fase de jogo
 @login_required(redirect_field_name='login')
 def animefase(request, num, focus):
     musicas = Musica.objects.filter(fase=num)
     user = auth.get_user(request)
     lista = UserResps.objects.filter(usuario__username__iexact=user)
-    pontuacao = 0
     music = Musica.objects.filter(fase__lte=num)
-    if num == 1 or 2 or 3 or 4:
-        tema = "anime"
+    tema = achartema(request, num)
+    ante, prox = valfase(request, tema, num)
+    pontotema, pontofase = pontosjogador(request, num, tema)
+    podepassar = proxfase(request, pontotema, num)
+    return render(request, 'animes/animefase.html', {'musicas': musicas, 'lista': lista, 'pontofase': pontofase, 'pontotema': pontotema, 'podepassar': podepassar,
+                                                     'focus': focus, 'prox': prox, 'ante': ante})
 
-    for li in lista:
-        for mu in music:
-            if li.respostas_lista == mu:
-                if mu.tipo == tema:
-                    if mu.fase == num:
-                        if li.acertou:
-                            pontuacao += 1
-    return render(request, 'animes/animefase.html', {'musicas': musicas, 'lista': lista, 'pontuacao': pontuacao, 'focus': focus})
 
+# Valida se o jogador acertou a musica
 def validar(request, musica_id):
     musicas = get_object_or_404(UserResps, id=musica_id)
     texto = request.GET.get('escrito')
@@ -100,4 +175,5 @@ def validar(request, musica_id):
         musicas.save()
         return redirect('animefase', num, focus)
         # return HttpResponseRedirect(request.META.get("HTTP_REFERER"))
+
 

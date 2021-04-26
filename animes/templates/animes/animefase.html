@@ -35,10 +35,24 @@
 
   </div>
     {% endfor %}
-<span class="align-middle" style="font-size: 300%; color: gold; margin: 15%;"> {{pontuacao}} / 25 </span>
-    Você está logado como: {{user}}
+    <a href="{% url 'animefase' num=ante focus='1' %}">
+        <img style="width: 90%;" src="/media/media/capas/seta.png">
+    </a>
+    {% if podepassar %}
+     <a href="{% url 'animefase' num=prox focus='1' %}">
+        <img style="width: 90%; -moz-transform: scaleX(-1);
+        -o-transform: scaleX(-1);
+        -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);" src="/media/media/capas/seta.png">
+     </a>
+    {% else %}
+    <a href="">
+        <img style="width: 90%;" src="/media/media/capas/setabloqueada.png">
+    </a>
+    {% endif %}
+<span class="align-middle" style="font-size: 200%; color: gold; margin: 15%;"> {{pontofase}} / 25 </span>
+<span class="align-middle" style="font-size: 200%; color: gold; margin: 15%;"> {{pontotema}} / 100 </span>
+Você está logado como: {{user}}
 </div>
-
-
 <script src="{% static 'js/focus.js' %}"></script>
 {% endblock %}
