@@ -215,3 +215,22 @@ p {
 .text--center {
   text-align: center;
 }
+
+.botaoconv{
+    width: 320px;
+    height: 40px;
+    background: yellow;
+    text-align: center;
+    float: left;
+    top: 50%;
+    position: relative;
+    background-color: var(--loginSubmitBackgroundColor);
+    color: var(--loginSubmitColor);
+    font-weight: 700;
+    margin-top: 35px;
+
+    /* flex para alinhar conteúdo*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

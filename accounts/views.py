@@ -69,3 +69,15 @@ def register(request):
 def logout(request):
     auth.logout(request)
     return render(request, 'accounts/login.html')
+
+def convidado(request):
+    userguest = User.objects.latest('id')
+    usuario = 'guest' + str(userguest.id)
+    email = usuario + '@' + usuario + '.com'
+    senha = 'master'
+    nome = usuario
+    user = User.objects.create_user(username=usuario, email=email, password=senha, first_name=nome)
+    user.save()
+    user = auth.authenticate(request, username=usuario, password=senha)
+    auth.login(request, user)
+    return redirect('index')

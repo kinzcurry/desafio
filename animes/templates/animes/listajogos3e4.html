@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block 'conteudo' %}
+<link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+
+<div class="separador2">
+  <div class="grid-fase">
+    <a href="{% url 'animefase' num='9' focus='1' %}">
+        <img  src="/media/media/capas/filme1ab.jpg">
+    </a>
+    <span class="placar"> {{pontuacao}} /25 </span>
+  </div>
+    {% if pontuacao >= 15 %}
+    <div class="grid-fase">
+        <a  href="{% url 'animefase' num='10' focus='1' %}">
+            <img  src="/media/media/capas/filme2ab.jpg">
+        </a>
+        <span class="placar"> {{pontuacao}} /25 </span>
+  </div>
+    {% else %}
+    <div class="grid-fase">
+        <img src="/media/media/capas/filme2fe.jpg">
+        <span class="placar"> {{pontuacao}} /25 </span>
+    </div>
+    {% endif %}
+    {% if pontuacao >= 30 %}
+    <div class="grid-fase">
+        <a  href="{% url 'animefase' num='11' focus='1' %}">
+            <img src="/media/media/capas/filme3ab.jpg">
+        </a>
+        <span class="placar"> {{pontuacao}} /25 </span>
+  </div>
+    {% else %}
+    <div class="grid-fase">
+        <img src="/media/media/capas/filme3fe.jpg">
+        <span class="placar"> {{pontuacao}} /25 </span>
+    </div>
+    {% endif %}
+    {% if pontuacao >= 45 %}
+    <div class="grid-fase">
+        <a  href="{% url 'animefase' num='12' focus='1' %}">
+            <img src="/media/media/capas/filme4ab.jpg">
+        </a>
+        <span class="placar"> {{pontuacao}} /25 </span>
+  </div>
+    {% else %}
+    <div class="grid-fase">
+        <img src="/media/media/capas/filme4fe.jpg">
+        <span class="placar"> {{pontuacao}} /25 </span>
+    </div>
+    {% endif %}
+</div>
+
+{% endblock%}

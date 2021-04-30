@@ -1,58 +1,64 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block 'conteudo' %}
-<link rel="stylesheet" href="{% static 'css/audio.css' %}">
+<link rel="stylesheet" href="{% static 'css/fase.css' %}">
 
-<div class="grid">
-    {% for music in musicas %}
-    <div class="grid-item">
-      {% for lis in lista %}
+<div class="wrapper">
+
+    <ul class="grid cards">
+        {% for music in musicas %}
+            <li>
+                {% for lis in lista %}
                 {% if music == lis.respostas_lista %}
                     {% if lis.acertou %}
-                    <img src="{{music.imagem.url}}">
+                <img  class="imagem" src="{{music.imagem.url}}">
                     {% else %}
-                    <img src="/media/media/controle.png">
+                <img class="imagem" src="/media/media/controle.png">
                     {% endif %}
-                <audio controls>
-                    <source src="{{ music.musica.url }}" type="audio/mp3">
+                <audio class="audiotamanho" controls>
+                   <source src="{{ music.musica.url }}" type="audio/mp3">
                 </audio>
                 <form action="{% url 'validar' lis.id %}" method="get" >
                     {% if lis.acertou %}
-                        {% if lis.id == focus %}
-                            <input type="text" name="escrito" id="" disabled placeholder="{{music}}">
-<!--                            <button class="congrats" disabled> Validar </button>-->
-                        {% else %}
-                            <input type="text" name="escrito" id="inputnome" placeholder="{{music}}" disabled>
-<!--                            <button class="congrats" disabled> Validar </button>-->
-                        {% endif %}
+                    <input style="width:100%;" type="text" disabled placeholder="{{music}}">
+                    <button style="width:100%;" disabled> Validar</button>
                     {% else %}
-                        <input type="text" name="escrito">
-                        <button class="bouncy" type="submit" id="btnnome">Validar</button>
+                    <input name="escrito" style="width:100%;" type="text">
+                    <button style="width:100%; background-color: #5a5a5a; color: white;"> Validar</button>
                     {% endif %}
                 </form>
-            {% endif %}
-      {% endfor %}
+                {% endif %}
+        {% endfor %}
 
-  </div>
-    {% endfor %}
-    <a href="{% url 'animefase' num=ante focus='1' %}">
-        <img style="width: 90%;" src="/media/media/capas/seta.png">
-    </a>
+      </li>
+        {% endfor %}
+        <li>
+        <a href="{% url 'animefase' num=ante focus='1' %}">
+        <img style="width: 50%;" src="/media/media/capas/seta.png">
+        </a>
     {% if podepassar %}
+    <br>
      <a href="{% url 'animefase' num=prox focus='1' %}">
-        <img style="width: 90%; -moz-transform: scaleX(-1);
+        <img style="width: 50%; -moz-transform: scaleX(-1);
         -o-transform: scaleX(-1);
         -webkit-transform: scaleX(-1);
-    transform: scaleX(-1);" src="/media/media/capas/seta.png">
+    transform: scaleX(-1); float: right;" src="/media/media/capas/seta.png">
      </a>
     {% else %}
+    <br>
     <a href="">
-        <img style="width: 90%;" src="/media/media/capas/setabloqueada.png">
+        <img style="width: 50%;" src="/media/media/capas/setabloqueada.png">
     </a>
+    </li>
     {% endif %}
-<span class="align-middle" style="font-size: 200%; color: gold; margin: 15%;"> {{pontofase}} / 25 </span>
-<span class="align-middle" style="font-size: 200%; color: gold; margin: 15%;"> {{pontotema}} / 100 </span>
-Você está logado como: {{user}}
+        <li>
+    <span style="font-size: 200%; color: black; margin: 10%;">Pontuação</span>
+    <span class="align-middle" style="font-size: 200%; color: black; margin: 10%;"> Fase {{pontofase}} / 25 </span>
+    <span class="align-middle" style="font-size: 200%; color: black; margin: 10%;"> Geral {{pontotema}} / 100 </span>
+        </li>
+    </ul>
 </div>
+
 <script src="{% static 'js/focus.js' %}"></script>
+
 {% endblock %}

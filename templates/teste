@@ -1,51 +1,60 @@
-.separador{
-  display: grid;
-  grid-gap: 2px;
-  grid-column-start: 1;
-  grid-column-end: 6;
-  margin-left: 10%;
-  width: 100%;
-  grid-template-columns: 9% 9% 9% 9% 9% 9% 9% 9% 9%;
-  grid-template-rows: 33% 33% 33%;
+{% extends 'base.html' %}
+{% load static %}
+{% block 'conteudo' %}
+<link rel="stylesheet" href="{% static 'css/audio.css' %}">
 
-}
-.item-separador{
-  position: relative;
-  padding-left: 5px;
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-  transition: 0.3s;
-  box-sizing: border-box;
-}
-.item-separador:hover {
-  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-}
-.item-separador input{
-  width: 100%;
-  padding: 0;
-  margin-left: -3px
-}
-.item-separador button{
-  width: 104%;
-  padding: 0;
-  margin-left: -3px
-}
-.grid-fase{
-    position: relative;
-    padding-left: 5px;
-    transition: 0.3s;
-    box-sizing: border-box;
-}
-.grid-fase img{
-    position: relative;
-    width: 50%;
-    margin-top: 1%;
+<div class="grid">
+    {% for music in musicas %}
+    <div class="grid-item">
+      {% for lis in lista %}
+                {% if music == lis.respostas_lista %}
+                    {% if lis.acertou %}
+                    <img src="{{music.imagem.url}}">
+                    {% else %}
+                    <img src="/media/media/controle.png">
+                    {% endif %}
+                <audio controls>
+                    <source src="{{ music.musica.url }}" type="audio/mp3">
+                </audio>
+                <form action="{% url 'validar' lis.id %}" method="get" >
+                    {% if lis.acertou %}
+                        {% if lis.id == focus %}
+                            <input type="text" name="escrito" id="" disabled placeholder="{{music}}">
+<!--                            <button class="congrats" disabled> Validar </button>-->
+                        {% else %}
+                            <input type="text" name="escrito" id="inputnome" placeholder="{{music}}" disabled>
+<!--                            <button class="congrats" disabled> Validar </button>-->
+                        {% endif %}
+                    {% else %}
+                        <input type="text" name="escrito">
+                        <button class="bouncy" type="submit" id="btnnome">Validar</button>
+                    {% endif %}
+                </form>
+            {% endif %}
+      {% endfor %}
 
-}
-.separador2{
-    display: grid;
-    grid-gap: 2px;
-    margin-left: 25%;
-    width: 100%;
-    grid-template-columns: 40% 40%;
-    grid-template-rows: 50% 50%;
-}
+  </div>
+    {% endfor %}
+    <a href="{% url 'animefase' num=ante focus='1' %}">
+        <img style="width: 90%;" src="/media/media/capas/seta.png">
+    </a>
+    {% if podepassar %}
+     <a href="{% url 'animefase' num=prox focus='1' %}">
+        <img style="width: 90%; -moz-transform: scaleX(-1);
+        -o-transform: scaleX(-1);
+        -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);" src="/media/media/capas/seta.png">
+     </a>
+    {% else %}
+    <a href="">
+        <img style="width: 90%;" src="/media/media/capas/setabloqueada.png">
+    </a>
+    {% endif %}
+<span class="align-middle" style="font-size: 200%; color: gold; margin: 15%;"> {{pontofase}} / 25 </span>
+<span class="align-middle" style="font-size: 200%; color: gold; margin: 15%;"> {{pontotema}} / 100 </span>
+Você está logado como: {{user}}
+</div>
+<script src="{% static 'js/focus.js' %}"></script>
+
+{% endblock %}
+

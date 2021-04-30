@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block 'conteudo' %}
+
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">id</th>
+      <th scope="col">Original</th>
+      <th scope="col">Validar</th>
+      <th scope="col">Validar</th>
+      <th scope="col">Validar</th>
+      <th scope="col">Categoria</th>
+      <th scope="col">identificador</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for musica in musicas %}
+    <tr>
+      <th scope="row">{{musica.id}}</th>
+      <td>{{musica.nome}}</td>
+      <td>{{musica.nome2}}</td>
+      <td>{{musica.nome3}}</td>
+      <td>{{musica.nome4}}</td>
+      <td>{{musica.tipo}}</td>
+      <td>{{musica.fase}}</td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}
