@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block 'conteudo' %}
+<link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+<div class="separarfases">
+    <a  href="{% url 'listaseries' %}">
+        <img style="margin-left: 20%" src="/media/media/capas/musicalseries.png">
+    </a>
+</div>
+{% endblock%}

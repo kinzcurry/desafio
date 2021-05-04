@@ -1,16 +1,32 @@
 {% extends 'base.html' %}
+{% load static%}
 {% block 'conteudo' %}
-<div class="col-12">
-    <a  href="{% url 'listajogos' %}">
+
+<link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+<link rel="stylesheet" href="{% static 'css/index.css' %}">
+
+<div class="container-xxl">
+    <span class="titulo"> Como jogar: </span>
+    <br>
+    <span> - Escolha o tema do desafio geek abaixo. </span>
+    <br>
+    <span> - Cada desafio geek possui um total de 100 desafios divididos em 4 níveis cada </span>
+    <br>
+    <span> - Clique no desafio e responda corretamente </span>
+    <br>
+    <span> - Pontue mais que a galera e compartilhe seus resultados </span>
+</div>
+<div class="col-12 indexjogos">
+    <a  href="{% url 'geracaodeanimes' %}">
         <img style="margin-left: 20%" src="/media/media/capas/animecapa.png">
     </a>
-    <a  href="{% url 'listafilmes' %}">
+    <a  href="{% url 'geracaodefilmes' %}">
         <img style="margin-left: 20%" src="/media/media/capas/capafilmes.png">
     </a>
-    <a  href="{% url 'listajogos3e4' %}">
+    <a  href="{% url 'geracaodegames' %}">
         <img style="margin-left: 20%" src="/media/media/capas/capajogos.png">
     </a>
-    <a  href="">
+    <a  href="{% url 'geracaodeseries' %}">
         <img style="margin-left: 20%" src="/media/media/capas/capaseries.png">
     </a>
 </div>

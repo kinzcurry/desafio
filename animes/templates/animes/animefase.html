@@ -15,7 +15,7 @@
                     {% else %}
                 <img class="imagem" src="/media/media/controle.png">
                     {% endif %}
-                <audio class="audiotamanho" controls>
+                <audio class="audiotamanho" controls controlsList="nodownload">
                    <source src="{{ music.musica.url }}" type="audio/mp3">
                 </audio>
                 <form action="{% url 'validar' lis.id %}" method="get" >
@@ -24,7 +24,7 @@
                     <button style="width:100%;" disabled> Validar</button>
                     {% else %}
                     <input name="escrito" style="width:100%;" type="text">
-                    <button style="width:100%; background-color: #5a5a5a; color: white;"> Validar</button>
+                    <button style="width:100%; background-color: #AFD2E9; color: black;"> Validar</button>
                     {% endif %}
                 </form>
                 {% endif %}
@@ -52,9 +52,13 @@
     </li>
     {% endif %}
         <li>
-    <span style="font-size: 200%; color: black; margin: 10%;">Pontuação</span>
-    <span class="align-middle" style="font-size: 200%; color: black; margin: 10%;"> Fase {{pontofase}} / 25 </span>
-    <span class="align-middle" style="font-size: 200%; color: black; margin: 10%;"> Geral {{pontotema}} / 100 </span>
+    <span style="font-size: 200%; color: #AFD2E9; margin: 10%;">Pontuação</span>
+    <span class="align-middle" style="font-size: 200%; color: #AFD2E9; margin: 10%;"> Fase</span>
+            <br>
+    <span class="align-middle" style="font-size: 200%; color: #AFD2E9; margin: 10%;"> {{pontofase}} / 25 </span>
+    <span class="align-middle" style="font-size: 200%; color: #AFD2E9; margin: 10%;"> Geral </span>
+            <br>
+    <span class="align-middle" style="font-size: 200%; color: #AFD2E9; margin: 10%;"> {{pontotema}} / 100 </span>
         </li>
     </ul>
 </div>

@@ -4,50 +4,43 @@
 {% block 'conteudo' %}
 <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
 
-<div class="separador2">
+<div class="separarfases">
   <div class="grid-fase">
     <a href="{% url 'animefase' num='5' focus='1' %}">
-        <img  src="/media/media/capas/filme1ab.jpg">
+        <img  src="/media/media/capas/filmefase1.png">
     </a>
-    <span class="placar"> {{pontuacao}} /25 </span>
   </div>
     {% if pontuacao >= 15 %}
     <div class="grid-fase">
         <a  href="{% url 'animefase' num='6' focus='1' %}">
-            <img  src="/media/media/capas/filme2ab.jpg">
+            <img  src="/media/media/capas/filmefase2ab.png">
         </a>
-        <span class="placar"> {{pontuacao}} /25 </span>
   </div>
     {% else %}
     <div class="grid-fase">
-        <img src="/media/media/capas/filme2fe.jpg">
-        <span class="placar"> {{pontuacao}} /25 </span>
+        <img src="/media/media/capas/filmefase2fe.png">
     </div>
     {% endif %}
     {% if pontuacao >= 30 %}
     <div class="grid-fase">
         <a  href="{% url 'animefase' num='7' focus='1' %}">
-            <img src="/media/media/capas/filme3ab.jpg">
+            <img src="/media/media/capas/filmefase3ab.png">
         </a>
-        <span class="placar"> {{pontuacao}} /25 </span>
   </div>
     {% else %}
     <div class="grid-fase">
-        <img src="/media/media/capas/filme3fe.jpg">
-        <span class="placar"> {{pontuacao}} /25 </span>
+        <img src="/media/media/capas/filmefase3fe.png">
     </div>
     {% endif %}
     {% if pontuacao >= 45 %}
     <div class="grid-fase">
         <a  href="{% url 'animefase' num='8' focus='1' %}">
-            <img src="/media/media/capas/filme4ab.jpg">
+            <img src="/media/media/capas/filmefase4ab.png">
         </a>
-        <span class="placar"> {{pontuacao}} /25 </span>
   </div>
     {% else %}
     <div class="grid-fase">
-        <img src="/media/media/capas/filme4fe.jpg">
-        <span class="placar"> {{pontuacao}} /25 </span>
+        <img src="/media/media/capas/filmefase4fe.png">
     </div>
     {% endif %}
 </div>

@@ -6,41 +6,41 @@
 
 <div class="separarfases">
   <div class="grid-fase">
-    <a href="{% url 'animefase' num='9' focus='1' %}">
-        <img  src="/media/media/capas/jogofase1.png">
+    <a href="{% url 'animefase' num='13' focus='1' %}">
+        <img  src="/media/media/capas/capaseries1.png">
     </a>
   </div>
     {% if pontuacao >= 15 %}
     <div class="grid-fase">
-        <a  href="{% url 'animefase' num='10' focus='1' %}">
-            <img  src="/media/media/capas/jogofase2ab.png">
+        <a  href="{% url 'animefase' num='14' focus='1' %}">
+            <img  src="/media/media/capas/capaseries2ab.png">
         </a>
   </div>
     {% else %}
     <div class="grid-fase">
-        <img src="/media/media/capas/jogofase2fe.png">
+        <img src="/media/media/capas/capaseries2fe.png">
     </div>
     {% endif %}
     {% if pontuacao >= 30 %}
     <div class="grid-fase">
-        <a  href="{% url 'animefase' num='11' focus='1' %}">
-            <img src="/media/media/capas/jogofase3ab.png">
+        <a  href="{% url 'animefase' num='15' focus='1' %}">
+            <img src="/media/media/capas/capaseries3ab.png">
         </a>
   </div>
     {% else %}
     <div class="grid-fase">
-        <img src="/media/media/capas/jogofase3fe.png">
+        <img src="/media/media/capas/capaseries3fe.png">
     </div>
     {% endif %}
     {% if pontuacao >= 45 %}
     <div class="grid-fase">
-        <a  href="{% url 'animefase' num='12' focus='1' %}">
-            <img src="/media/media/capas/jogofase4ab.png">
+        <a  href="{% url 'animefase' num='16' focus='1' %}">
+            <img src="/media/media/capas/capaseries4ab.png">
         </a>
   </div>
     {% else %}
     <div class="grid-fase">
-        <img src="/media/media/capas/jogofase4fe.png">
+        <img src="/media/media/capas/capaseries4fe.png">
     </div>
     {% endif %}
 </div>

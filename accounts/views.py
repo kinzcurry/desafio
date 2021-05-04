@@ -1,4 +1,4 @@
-from django.contrib import auth
+from django.contrib import auth, messages
 from django.contrib.auth.models import User
 from django.core.validators import validate_email
 from django.shortcuts import render, redirect
@@ -36,32 +36,27 @@ def register(request):
     senha2 = request.POST.get('senha2')
 
     if not nome or not email or not usuario or not senha or not senha2:
-        # messages.error(request, 'Todos os campos precisam ser preenchidos')
-        print('preencha todos os campos')
+        messages.error(request, 'Todos os campos precisam ser preenchidos')
         return render(request, 'accounts/register.html')
 
     try:
         validate_email(email)
     except:
-        # messages.error(request, 'Email invalido')
-        print('email inválido')
+        messages.error(request, 'Email invalido')
         return render(request, 'accounts/register.html')
     if senha != senha2:
-        # messages.error(request, 'Senhas estão diferentes')
-        print('Senhas estão diferentes')
+        messages.error(request, 'Senhas estão diferentes')
         return render(request, 'accounts/register.html')
 
     if User.objects.filter(username=usuario).exists():
-        # messages.error(request, 'Usuário já cadastrado')
-        print('usuario já cadastrado')
+        messages.error(request, 'Usuário já cadastrado')
         return render(request, 'accounts/register.html')
 
     if User.objects.filter(email=email).exists():
-        # messages.error(request, 'Email já cadastrado')
-        print('email já existe')
+        messages.error(request, 'Email já cadastrado')
         return render(request, 'accounts/register.html')
-    # messages.success(request, 'Registrado com sucesso')
-    print('registrado com sucesso')
+
+    messages.success(request, 'Registrado com sucesso')
     user = User.objects.create_user(username=usuario, email=email, password=senha, first_name=nome)
     user.save()
     return redirect('login')

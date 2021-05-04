@@ -3,51 +3,43 @@
 
 {% block 'conteudo' %}
 <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
-
-<div class="separador2">
+<div class="separarfases">
   <div class="grid-fase">
     <a href="{% url 'animefase' num='1' focus='1' %}">
-        <img src="/media/media/capas/1.png">
+        <img src="/media/media/capas/animefase1.png">
     </a>
-    <span class="placar"> {{pontuacao}} /25 </span>
   </div>
     {% if pontuacao >= 15 %}
     <div class="grid-fase">
         <a href="{% url 'animefase' num='2' focus='1' %}">
-            <img src="/media/media/capas/2aberto.png">
+            <img src="/media/media/capas/animefase2ab.png">
         </a>
-        <span class="placar"> {{pontuacao}} /25 </span>
   </div>
     {% else %}
     <div class="grid-fase">
-        <img src="/media/media/capas/2fechado.png">
-        <span class="placar"> {{pontuacao}} /25 </span>
+        <img src="/media/media/capas/animefase2fe.png">
     </div>
     {% endif %}
     {% if pontuacao >= 30 %}
     <div class="grid-fase">
         <a  href="{% url 'animefase' num='3' focus='1' %}">
-            <img src="/media/media/capas/3aberto.png">
+            <img src="/media/media/capas/animefase3ab.png">
         </a>
-        <span class="placar"> {{pontuacao}} /25 </span>
   </div>
     {% else %}
     <div class="grid-fase">
-        <img src="/media/media/capas/3fechado.png">
-        <span class="placar"> {{pontuacao}} /25 </span>
+        <img src="/media/media/capas/animefase3fe.png">
     </div>
     {% endif %}
     {% if pontuacao >= 45 %}
     <div class="grid-fase">
         <a  href="{% url 'animefase' num='4' focus='1' %}">
-            <img src="/media/media/capas/4aberto.png">
+            <img src="/media/media/capas/animefase4ab.png">
         </a>
-        <span class="placar"> {{pontuacao}} /25 </span>
   </div>
     {% else %}
     <div class="grid-fase">
-        <img src="/media/media/capas/4fechado.png">
-        <span class="placar"> {{pontuacao}} /25 </span>
+        <img src="/media/media/capas/animefase4fe.png">
     </div>
     {% endif %}
 </div>

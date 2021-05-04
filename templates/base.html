@@ -8,8 +8,8 @@
 <nav class="navbar navbar-expand-md">
   <div class="container-fluid">
     <a class="navbar-brand" href="{% url 'index' %}">
-      <img class="logo horizontal-logo" src="url da logo aqui" alt="Desafio Geek">
-	  </a>
+      <img class="logo horizontal-logo" width="80px" height="40px" src="/media/media/capas/logo.png" alt="Desafio Geek">
+    </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -23,10 +23,10 @@
           Jogos
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown2">
-            <a style="color: black;" class="dropdown-item" href="{% url 'listajogos' %}">Desafio Animes</a>
-            <a style="color: black;" class="dropdown-item" href="{% url 'listafilmes' %}">Desafio Filmes</a>
-            <a style="color: black;" class="dropdown-item" href="{% url 'listajogos3e4' %}">Desafio Games</a>
-            <a style="color: black;" class="dropdown-item" href="#">Desafio Séries</a>
+            <a style="color: black;" class="dropdown-item" href="{% url 'geracaodeanimes' %}">Desafio Animes</a>
+            <a style="color: black;" class="dropdown-item" href="{% url 'geracaodefilmes' %}">Desafio Filmes</a>
+            <a style="color: black;" class="dropdown-item" href="{% url 'geracaodegames' %}">Desafio Games</a>
+            <a style="color: black;" class="dropdown-item" href="{% url 'geracaodeseries' %}">Desafio Séries</a>
         </li>
         <li class="nav-item">
           <a class="nav-link"  href="{% url 'login' %}">Login</a>

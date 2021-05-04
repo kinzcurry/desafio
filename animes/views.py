@@ -6,7 +6,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from accounts import admin
 from musicas.models import Musica
 from musicas.models import UserResps
-from django.contrib import auth
+from django.contrib import auth, messages
 
 
 # Create your views here.
@@ -81,20 +81,34 @@ def listajogos3e4(request):
         criarbd(request, tipolista)
     return render(request, 'animes/listajogos3e4.html', {'pontuacao': pontuacao})
 
+def listaseries(request):
+    user = auth.get_user(request)
+    lista = UserResps.objects.filter(usuario__username__iexact=user)
+    pontuacao = 0
+    cont = 0
+    for li in lista:
+        if li.respostas_lista.tipo == 'series':
+            cont += 1
+            if li.acertou:
+                pontuacao += 1
+    if cont == 0:
+        tipolista = 'series'
+        criarbd(request, tipolista)
+    return render(request, 'animes/listaseries.html', {'pontuacao': pontuacao})
 
 # Acha o tema escolhido pelo jogador
 def achartema(request, num):
     if num <= 4:
         tema = "anime"
-        print(' entrou em anime')
         return tema
     elif 4 < num <= 8:
         tema = "filme"
-        print(' entrou em filme')
         return tema
     elif 8 < num <= 12:
         tema = 'jogos3e4'
-        print('entrou em jogos3e4')
+        return tema
+    elif 12 < num <= 16:
+        tema = 'series'
         return tema
 
 
@@ -123,6 +137,7 @@ def valfase(request, tema, num):
         else:
             ante = num - 1
             prox = num + 1
+
     elif tema == "jogos3e4":
         if num == 9:
             ante = 9
@@ -130,6 +145,17 @@ def valfase(request, tema, num):
         elif num == 12:
             ante = num - 1
             prox = 12
+        else:
+            ante = num - 1
+            prox = num + 1
+
+    elif tema == "series":
+        if num == 13:
+            ante = 13
+            prox = num + 1
+        elif num == 16:
+            ante = num - 1
+            prox = 16
         else:
             ante = num - 1
             prox = num + 1
@@ -159,11 +185,11 @@ def proxfase(request, pontotema, num):
         podepassar = True
         return podepassar
     elif pontotema >= 30:
-        if num == 1 or num == 2 or num == 5 or num == 6 or num == 9 or num == 10:
+        if num == 1 or num == 2 or num == 5 or num == 6 or num == 9 or num == 10 or num == 13 or num == 14:
             podepassar = True
             return podepassar
     elif pontotema >= 15:
-        if num == 1 or num == 5 or num == 9:
+        if num == 1 or num == 5 or num == 9 or num == 13:
             podepassar = True
             return podepassar
     else:
@@ -177,7 +203,6 @@ def animefase(request, num, focus):
     user = auth.get_user(request)
     lista = UserResps.objects.filter(usuario__username__iexact=user)
     music = Musica.objects.filter(fase__lte=num)
-    print(num)
     tema = achartema(request, num)
     ante, prox = valfase(request, tema, num)
     pontotema, pontofase = pontosjogador(request, num, tema)
@@ -227,3 +252,21 @@ def validar(request, musica_id):
 def listarmusicas(request):
     musicas = Musica.objects.filter().all()
     return render(request, 'animes/listarmusicas.html', {'musicas': musicas})
+
+
+def geracaodegames(request):
+    return render(request, 'animes/geracaodegames.html')
+
+
+def geracaodefilmes(request):
+    return render(request, 'animes/geracaodefilmes.html')
+
+
+def geracaodeseries(request):
+    return render(request, 'animes/geracaodeseries.html')
+
+
+def geracaodeanimes(request):
+    return render(request, 'animes/geracaodeanimes.html')
+
+
