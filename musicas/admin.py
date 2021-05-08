@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Musica, UserResps
+from .models import Musica, UserResps, UserDicas
 # Register your models here.
 
 class MusicaAdmin(admin.ModelAdmin):
@@ -7,3 +7,4 @@ class MusicaAdmin(admin.ModelAdmin):
 
 admin.site.register(Musica, MusicaAdmin)
 admin.site.register(UserResps)
+admin.site.register(UserDicas)

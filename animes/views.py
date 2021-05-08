@@ -5,6 +5,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 
 from accounts import admin
 from musicas.models import Musica
+from musicas.models import UserDicas
 from musicas.models import UserResps
 from django.contrib import auth, messages
 
@@ -15,6 +16,10 @@ from django.contrib import auth, messages
 def criarbd(request, tipolista):
     user = auth.get_user(request)
     musica = Musica.objects.filter(tipo=tipolista)
+    dicasuser = UserDicas.objects.filter(usuario__username__iexact=user, fase=tipolista)
+    if not dicasuser:
+        dicas = UserDicas(usuario=user, fase=tipolista, qtd_dicas=5, pontuacaotema=0)
+        dicas.save()
     cont = 0
     while cont < len(musica):
         resp = UserResps(usuario=user, respostas_lista=musica[cont], acertou=False)
@@ -218,27 +223,36 @@ def proxfase(request, pontotema, num):
         return podepassar
 
 
+# Calcula a quantidade de dicas do jogador
+def qtddica(request, user, tema):
+    dicas = UserDicas.objects.filter(usuario__username__iexact=user, fase=tema)
+    for dica in dicas:
+        return dica.qtd_dicas
+
 # Gera a fase de jogo
 @login_required(redirect_field_name='login')
 def animefase(request, num, focus):
     musicas = Musica.objects.filter(fase=num)
     user = auth.get_user(request)
     lista = UserResps.objects.filter(usuario__username__iexact=user)
-    music = Musica.objects.filter(fase__lte=num)
+    # music = Musica.objects.filter(fase__lte=num)
     tema = achartema(request, num)
     temamaisculo = tema.capitalize()
     ante, prox = valfase(request, tema, num)
     pontotema, pontofase = pontosjogador(request, num, tema)
     podepassar = proxfase(request, pontotema, num)
+    achardica = qtddica(request, user, tema)
     return render(request, 'animes/animefase.html',
                   {'musicas': musicas, 'lista': lista, 'pontofase': pontofase, 'pontotema': pontotema,
                    'podepassar': podepassar,
-                   'focus': focus, 'prox': prox, 'ante': ante, 'temamaisculo': temamaisculo})
+                   'focus': focus, 'prox': prox, 'ante': ante, 'temamaisculo': temamaisculo, 'achardica': achardica})
 
 
 # Valida se o jogador acertou a musica
 def validar(request, musica_id):
+    user = auth.get_user(request)
     musicas = get_object_or_404(UserResps, id=musica_id)
+    pontosdicas = UserDicas.objects.filter(usuario__username=user, fase=musicas.respostas_lista.tipo)
     texto = request.GET.get('escrito')
     texto = texto.lower()
     focus = musica_id
@@ -248,19 +262,55 @@ def validar(request, musica_id):
     if texto == "":
         return redirect('animefase', num, focus)
     if musicas.respostas_lista.nome == texto:
+        for pontos in pontosdicas:
+            pontos.pontuacaotema += 1
+            if pontos.pontuacaotema == 15:
+                pontos.qtd_dicas += 3
+            elif pontos.pontuacaotema == 30:
+                pontos.qtd_dicas += 3
+            elif pontos.pontuacaotema == 45:
+                pontos.qtd_dicas += 3
+            pontos.save()
         musicas.acertou = True
         musicas.save()
         return redirect('animefase', num, focus)
         # return HttpResponseRedirect(request.META.get("HTTP_REFERER"))
     elif musicas.respostas_lista.nome2 == texto:
+        for pontos in pontosdicas:
+            pontos.pontuacaotema += 1
+            if pontos.pontuacaotema == 15:
+                pontos.qtd_dicas += 3
+            elif pontos.pontuacaotema == 30:
+                pontos.qtd_dicas += 3
+            elif pontos.pontuacaotema == 45:
+                pontos.qtd_dicas += 3
+            pontos.save()
         musicas.acertou = True
         musicas.save()
         return redirect('animefase', num, focus)
     elif musicas.respostas_lista.nome3 == texto:
+        for pontos in pontosdicas:
+            pontos.pontuacaotema += 1
+            if pontos.pontuacaotema == 15:
+                pontos.qtd_dicas += 3
+            elif pontos.pontuacaotema == 30:
+                pontos.qtd_dicas += 3
+            elif pontos.pontuacaotema == 45:
+                pontos.qtd_dicas += 3
+            pontos.save()
         musicas.acertou = True
         musicas.save()
         return redirect('animefase', num, focus)
     elif musicas.respostas_lista.nome4 == texto:
+        for pontos in pontosdicas:
+            pontos.pontuacaotema += 1
+            if pontos.pontuacaotema == 15:
+                pontos.qtd_dicas += 3
+            elif pontos.pontuacaotema == 30:
+                pontos.qtd_dicas += 3
+            elif pontos.pontuacaotema == 45:
+                pontos.qtd_dicas += 3
+            pontos.save()
         musicas.acertou = True
         musicas.save()
         return redirect('animefase', num, focus)

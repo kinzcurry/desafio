@@ -20,7 +20,7 @@
     <div>
         <span class="align-middle" style="font-size: 200%; color: #black; margin: 10%;"> Dicas </span>
             <br>
-        <span class="align-middle" style="font-size: 200%; color: #black; margin: 10%;"> XXX </span>
+        <span class="align-middle" style="font-size: 200%; color: #black; margin: 10%;"> {{achardica}} </span>
     </div>
     <div>
         <span style="margin-left:10%;"> {{temamaisculo}} Musical </span>
@@ -51,43 +51,36 @@
                     <button style="width:100%; background-color: #AFD2E9; color: black;"> Validar</button>
                     {% endif %}
                 </form>
-                <button style="width:100%; background-color: #AFD2E9; color: black;"> Dica</button>
+                <button id="{{music.id}}" onclick="teste(this.id)" value="{{music.dica}}" style="width:100%; background-color: #AFD2E9; color: black;"> Dica </button>
                 {% endif %}
         {% endfor %}
 
       </li>
         {% endfor %}
-        <li>
-        <a href="{% url 'animefase' num=ante focus='1' %}">
-        <img style="width: 50%;" src="/media/media/capas/seta.png">
-        </a>
+        <li style="width: 100%; height: 100%;">
+            <a href="{% url 'animefase' num=ante focus='1' %}">
+            <img style="width: 100%;" src="/media/media/capas/seta.png">
+            </a>
+        </li>
+        <li style="width: 100%; height: 100%;">
+            <span > Fase atual</span>
+        </li>
+        <li style="width: 100%; height: 100%;">
     {% if podepassar %}
-    <br>
      <a href="{% url 'animefase' num=prox focus='1' %}">
-        <img style="width: 50%; -moz-transform: scaleX(-1);
+        <img style="width: 100%; -moz-transform: scaleX(-1);
         -o-transform: scaleX(-1);
         -webkit-transform: scaleX(-1);
     transform: scaleX(-1); float: right;" src="/media/media/capas/seta.png">
      </a>
     {% else %}
-    <br>
     <a href="">
-        <img style="width: 50%;" src="/media/media/capas/setabloqueada.png">
+        <img style="width: 100%;" src="/media/media/capas/setabloqueada.png">
     </a>
     </li>
     {% endif %}
-        <li>
-    <span style="font-size: 200%; color: #AFD2E9; margin: 10%;">Pontuação</span>
-    <span class="align-middle" style="font-size: 200%; color: #AFD2E9; margin: 10%;"> Fase</span>
-            <br>
-    <span class="align-middle" style="font-size: 200%; color: #AFD2E9; margin: 10%;"> {{pontofase}} / 25 </span>
-    <span class="align-middle" style="font-size: 200%; color: #AFD2E9; margin: 10%;"> Geral </span>
-            <br>
-    <span class="align-middle" style="font-size: 200%; color: #AFD2E9; margin: 10%;"> {{pontotema}} / 100 </span>
-        </li>
     </ul>
 </div>
 
 <script src="{% static 'js/focus.js' %}"></script>
-
 {% endblock %}
