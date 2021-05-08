@@ -3,6 +3,30 @@
 {% block 'conteudo' %}
 <link rel="stylesheet" href="{% static 'css/fase.css' %}">
 
+<div class="infocontainer">
+    <div>
+        <img class="logo horizontal-logo" style="margin: 7px;" width="300px" height="150px" src="/media/media/capas/logo.png" alt="Desafio Geek">
+    </div>
+    <div>
+        <span class="align-middle" style="font-size: 200%; color: #black; margin: 10%;"> Pontos fase</span>
+        <br>
+        <span class="align-middle" style="font-size: 200%; color: #black; margin: 10%;"> {{pontofase}} / 25 </span>
+    </div>
+    <div>
+        <span class="align-middle" style="font-size: 200%; color: #black; margin: 10%;"> Geral </span>
+            <br>
+        <span class="align-middle" style="font-size: 200%; color: #black; margin: 10%;"> {{pontotema}} / 100 </span>
+    </div>
+    <div>
+        <span class="align-middle" style="font-size: 200%; color: #black; margin: 10%;"> Dicas </span>
+            <br>
+        <span class="align-middle" style="font-size: 200%; color: #black; margin: 10%;"> XXX </span>
+    </div>
+    <div>
+        <span style="margin-left:10%;"> {{temamaisculo}} Musical </span>
+    </div>
+</div>
+
 <div class="wrapper">
 
     <ul class="grid cards">
@@ -27,6 +51,7 @@
                     <button style="width:100%; background-color: #AFD2E9; color: black;"> Validar</button>
                     {% endif %}
                 </form>
+                <button style="width:100%; background-color: #AFD2E9; color: black;"> Dica</button>
                 {% endif %}
         {% endfor %}
 

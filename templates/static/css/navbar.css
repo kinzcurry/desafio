@@ -1,5 +1,5 @@
 body {
-  background: #9D96B8;
+  background: #7E7F9A;
 }
 
 .navbar .nav-item:not(:last-child) {
@@ -16,11 +16,11 @@ body {
 }
 
 .navbar {
-    background-color: #351e29; !important;
+    background-color: #131B23; !important;
 }
 
 .navbar a{
-    color: white;
+    color: #E9F1F7;
     font-weight: bolder;
     font-size: 24px;
 }
@@ -35,12 +35,11 @@ body {
 }
 
 .container-xxl{
-    background-color: #574AE2;
+    background-color: #E7DFC6;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     border: 4px solid #222A68;
     margin-top: 10px;
     margin-bottom: 10px;
-
 }
 
 .container-xxl span{

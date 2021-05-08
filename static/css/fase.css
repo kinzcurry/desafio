@@ -1,5 +1,6 @@
 body{
-    background: #9D96B8;
+    background: #7E7F9A;
+
 }
 .wrapper {
   margin: 0 auto;
@@ -13,9 +14,9 @@ body{
 }
 
 .cards li {
-  border: 2px solid #9A7197;
+  border: 2px solid #E9F1F7;
   border-radius:5px;
-  background-color: #7C5869;
+  background-color: #2274A5;
   color: #fff;
   flex: 1 1 200px;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
@@ -24,7 +25,7 @@ body{
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(9, 8%);
+  grid-template-columns: repeat(7, 10%);
   /*grid-template-columns: repeat(auto-fill, minmax(200px 1fr));*/
   grid-gap: 20px;
   margin-left: 10px;
@@ -42,4 +43,17 @@ body{
 }
 .audiotamanho{
     width: 100%;
+}
+
+.infocontainer{
+    display: grid;
+    grid-template-columns: repeat(4, 25%);
+    background-image: linear-gradient(to right, #E7DFC6, #E9F1F7);
+    border: 2px solid black;
+    border-radius:5px;
+    margin-top: 5px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.3);
+    margin-left: 10%;
+    margin-right: 10%;
+
 }

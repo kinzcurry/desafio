@@ -2,6 +2,14 @@
 {% load static %}
 {% block 'conteudo' %}
 
+<form method="get" action="{% url 'buscarusuario'  %}">
+  <input type="text" placeholder="nome do usuário" name="usuario">
+  <button>
+    Acertar tudo
+  </button>
+</form>
+
+
 <table class="table">
   <thead class="thead-dark">
     <tr>

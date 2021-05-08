@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block 'conteudo' %}
+<link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+
+<div class="separarfases">
+  <div class="grid-fase">
+    <a href="{% url 'animefase' num='17' focus='1' %}">
+        <img  src="/media/media/capas/jogofase1.png">
+    </a>
+  </div>
+    {% if pontuacao >= 15 %}
+    <div class="grid-fase">
+        <a  href="{% url 'animefase' num='18' focus='1' %}">
+            <img  src="/media/media/capas/jogofase2ab.png">
+        </a>
+  </div>
+    {% else %}
+    <div class="grid-fase">
+        <img src="/media/media/capas/jogofase2fe.png">
+    </div>
+    {% endif %}
+    {% if pontuacao >= 30 %}
+    <div class="grid-fase">
+        <a  href="{% url 'animefase' num='19' focus='1' %}">
+            <img src="/media/media/capas/jogofase3ab.png">
+        </a>
+  </div>
+    {% else %}
+    <div class="grid-fase">
+        <img src="/media/media/capas/jogofase3fe.png">
+    </div>
+    {% endif %}
+    {% if pontuacao >= 45 %}
+    <div class="grid-fase">
+        <a  href="{% url 'animefase' num='20' focus='1' %}">
+            <img src="/media/media/capas/jogofase4ab.png">
+        </a>
+  </div>
+    {% else %}
+    <div class="grid-fase">
+        <img src="/media/media/capas/jogofase4fe.png">
+    </div>
+    {% endif %}
+</div>
+
+{% endblock%}

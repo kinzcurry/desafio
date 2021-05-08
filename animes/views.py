@@ -22,13 +22,6 @@ def criarbd(request, tipolista):
         cont += 1
 
 
-def acertartudo():
-    lista = UserResps.objects.filter(usuario__username__iexact='ma')
-    for li in lista:
-        li.acertou = True
-        li.save()
-
-
 # Lista os 4 niveis do jogo dos animes
 @login_required(redirect_field_name='login')
 def listajogos(request):
@@ -81,6 +74,21 @@ def listajogos3e4(request):
         criarbd(request, tipolista)
     return render(request, 'animes/listajogos3e4.html', {'pontuacao': pontuacao})
 
+def listajogos5(request):
+    user = auth.get_user(request)
+    lista = UserResps.objects.filter(usuario__username__iexact=user)
+    pontuacao = 0
+    cont = 0
+    for li in lista:
+        if li.respostas_lista.tipo == 'jogos5':
+            cont += 1
+            if li.acertou:
+                pontuacao += 1
+    if cont == 0:
+        tipolista = 'jogos5'
+        criarbd(request, tipolista)
+    return render(request, 'animes/listajogos5.html', {'pontuacao': pontuacao})
+
 def listaseries(request):
     user = auth.get_user(request)
     lista = UserResps.objects.filter(usuario__username__iexact=user)
@@ -109,6 +117,9 @@ def achartema(request, num):
         return tema
     elif 12 < num <= 16:
         tema = 'series'
+        return tema
+    elif 16 < num <= 20:
+        tema = 'jogos5'
         return tema
 
 
@@ -160,6 +171,17 @@ def valfase(request, tema, num):
             ante = num - 1
             prox = num + 1
 
+    elif tema == "jogos5":
+        if num == 17:
+            ante = 17
+            prox = num + 1
+        elif num == 20:
+            ante = num - 1
+            prox = 20
+        else:
+            ante = num - 1
+            prox = num + 1
+
     return ante, prox
 
 
@@ -185,11 +207,11 @@ def proxfase(request, pontotema, num):
         podepassar = True
         return podepassar
     elif pontotema >= 30:
-        if num == 1 or num == 2 or num == 5 or num == 6 or num == 9 or num == 10 or num == 13 or num == 14:
+        if num == 1 or num == 2 or num == 5 or num == 6 or num == 9 or num == 10 or num == 13 or num == 14 or num == 17 or num == 18:
             podepassar = True
             return podepassar
     elif pontotema >= 15:
-        if num == 1 or num == 5 or num == 9 or num == 13:
+        if num == 1 or num == 5 or num == 9 or num == 13 or num == 17:
             podepassar = True
             return podepassar
     else:
@@ -204,13 +226,14 @@ def animefase(request, num, focus):
     lista = UserResps.objects.filter(usuario__username__iexact=user)
     music = Musica.objects.filter(fase__lte=num)
     tema = achartema(request, num)
+    temamaisculo = tema.capitalize()
     ante, prox = valfase(request, tema, num)
     pontotema, pontofase = pontosjogador(request, num, tema)
     podepassar = proxfase(request, pontotema, num)
     return render(request, 'animes/animefase.html',
                   {'musicas': musicas, 'lista': lista, 'pontofase': pontofase, 'pontotema': pontotema,
                    'podepassar': podepassar,
-                   'focus': focus, 'prox': prox, 'ante': ante})
+                   'focus': focus, 'prox': prox, 'ante': ante, 'temamaisculo': temamaisculo})
 
 
 # Valida se o jogador acertou a musica
@@ -270,3 +293,11 @@ def geracaodeanimes(request):
     return render(request, 'animes/geracaodeanimes.html')
 
 
+def buscarusuario (request):
+    nome = request.GET.get('usuario')
+    usu = UserResps.objects.filter(usuario__username=nome)
+    for us in usu:
+        us.acertou = True
+        us.save()
+
+    return redirect('listarmusicas')
