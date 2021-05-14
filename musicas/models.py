@@ -11,6 +11,7 @@ class Musica(models.Model):
     tipo = models.CharField(max_length=255)
     fase = models.IntegerField()
     dica = models.CharField(max_length=255, blank=True)
+    info = models.CharField(max_length=255, blank=True)
 
     def __str__(self):
         return self.nome
@@ -19,6 +20,7 @@ class UserResps(models.Model):
     usuario = models.ForeignKey(User, on_delete=models.CASCADE)
     respostas_lista = models.ForeignKey(Musica, on_delete=models.DO_NOTHING)
     acertou = models.BooleanField(default=False)
+    usou_dica = models.BooleanField(default=False)
 
     def __str__(self):
         return str(self.usuario)

@@ -1,48 +1,109 @@
-body{
-    background: #7E7F9A;
-
-}
-.wrapper {
-  margin: 0 auto;
-  width: 100%;
-}
-
-.cards {
+body, ul, li, p{
+  margin: 0px;
+  padding: 0px;
   list-style: none;
-  margin: 0;
-  padding: 0;
+  font-size: 1.2rem;
+  font-family: Arial;
+  background: #B8F3FF;
 }
 
-.cards li {
-  border: 2px solid #E9F1F7;
-  border-radius:5px;
-  background-color: #2274A5;
-  color: #fff;
-  flex: 1 1 200px;
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-  transition: 0.3s;
-}
+/* CSS menu */
 
-.grid {
-  display: grid;
-  grid-template-columns: repeat(7, 10%);
-  /*grid-template-columns: repeat(auto-fill, minmax(200px 1fr));*/
-  grid-gap: 20px;
-  margin-left: 10px;
-  margin-top: 3px;
-  align-items: center;
-  justify-content: center;
-}
-
-.imagem{
-  background-repeat: no-repeat;
-  background-position: 50% 50%;
-  background-size: cover;
+/* CSS cards */
+audio{
   width: 100%;
-  height: 140px;
+  margin-top: 4px;
 }
-.audiotamanho{
-    width: 100%;
+input{
+  width: 90%;
+  margin-left: 8px;
+
+}
+button{
+  width: 90%;
+  margin-left: 8px;
+  background: #63768D;
+  color: white;
+}
+form{
+    padding: 0px;
+    margin: 0px;
+}
+.flex{
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 1500px;
+  margin: 0 auto;
+}
+.flex > div{
+  flex: 1 1 200px;
+  background: #8AC6D0;
+  margin: 10px;
+  max-width: 150px;
+  border: 2px solid #63768D;
+  box-shadow: 4px 4px 4px 2px rgba(0, 0, 0, 0.5);
+  margin: 0 auto;
+  margin-bottom: 5px;
+  margin-top: 5px;
+  border-radius: 10%;
+}
+
+.carta img{
+  width: 99%;
+  height: 150px;
+  display: block;
+  margin: 0 auto;
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.5);
+  z-index: 9;
+
+}
+
+.mover .autoria{
+   position: relative;
+   margin-top: 0;
+   z-index: 2;
+  font-size: 10px;
+}
+.mover .imagemove{
+  position: relative;
+  margin-top: -30.5%;
+  z-index: 21;
+  border-radius: 10%;
+  transition-duration: .3s;
+  transition-timing-function: cubic-bezier(.10,.30,.30,.10);
+}
+.mover .imagemove:hover{
+  z-index: 10;
+  transform: translatey(+30%);
+}
+
+.mover .dica{
+  position: relative;
+   margin-top: 0;
+   z-index: 2;
+  font-size: 10px;
+}
+.mover .dicaescondida{
+
+}
+.mover .imagecomdica{
+  position: relative;
+  margin-top: -30.5%;
+  z-index: 5;
+  border-radius: 10%;
+  transition-duration: .3s;
+  transition-timing-function: cubic-bezier(.10,.30,.30,.10);
+}
+
+.mover .imagecomdica:hover {
+  z-index: 10;
+  transform: translatey(30%);
+}
+
+.comum{
+    position: relative;
+    z-index: 21;
+    border-radius: 10%;
 }
 
 .infocontainer{
@@ -55,6 +116,6 @@ body{
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.3);
     margin-left: 10%;
     margin-right: 10%;
-
-
+    margin-bottom: 20px;
 }
+

@@ -19,4 +19,6 @@ urlpatterns = [
     path('geracaodeseries/', views.geracaodeseries, name='geracaodeseries'),
     path('geracaodeanimes/', views.geracaodeanimes, name='geracaodeanimes'),
     path('buscarusuario/', views.buscarusuario, name='buscarusuario'),
+    path('<int:musica_id>/', views.dica, name='dica'),
+    path('atualizarbancodedados/', views.atualizarbancodedados, name='atualizarbancodedados'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

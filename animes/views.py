@@ -248,6 +248,24 @@ def animefase(request, num, focus):
                    'focus': focus, 'prox': prox, 'ante': ante, 'temamaisculo': temamaisculo, 'achardica': achardica})
 
 
+def dica(request, musica_id):
+    user = auth.get_user(request)
+    musicas = get_object_or_404(UserResps, id=musica_id)
+    focus = musica_id
+    # Esse num é a fase, para poder passar o id que ficará com o focus
+    num = musicas.respostas_lista.fase
+    quantidade = UserDicas.objects.filter(usuario__username__iexact=user)
+    for quant in quantidade:
+        if quant.qtd_dicas > 0:
+            if not musicas.usou_dica:
+                musicas.usou_dica = True
+                musicas.save()
+                quant.qtd_dicas -= 1
+                quant.save()
+                return redirect('animefase', num, focus)
+        else:
+            return redirect('animefase', num, focus)
+
 # Valida se o jogador acertou a musica
 def validar(request, musica_id):
     user = auth.get_user(request)
@@ -259,6 +277,7 @@ def validar(request, musica_id):
 
     # Esse num é a fase, para poder passar o id que ficará com o focus
     num = musicas.respostas_lista.fase
+
     if texto == "":
         return redirect('animefase', num, focus)
     if musicas.respostas_lista.nome == texto:
@@ -350,4 +369,34 @@ def buscarusuario (request):
         us.acertou = True
         us.save()
 
+    return redirect('listarmusicas')
+
+def atualizarbancodedados(request):
+    tema = request.GET.get('tema')
+    listarmusicas = Musica.objects.filter(tipo=tema)
+    dicas = ["procure nas suas anotaçoes", "adora rámen", "oi eu sou ...", "alma existe", "-", "o poder vem desse livrinho?!",
+             "japão e sua fascinante historia!!", "cabe no bolso?!", "que ceu lindo!! que noite linda!!", "serio que eles estão pelados?!",
+             "arigatou gozaiiiiiiimasu!!", "olha é a Angelica na tela!!", "eles sao entregadores de ifood?!", "essa dica é uma troca equivalente",
+             "ela procura 'e não acha'", "achei que ele fosse um pescador", "ela morde?!", "Ayrton, Ayrton, Ayrton, Ayrton Sena do Brasil!!",
+             "Eca!! ele vai comer os 20 mesmo?!", "tal pai tal filho", "vou usar essa serie na academia", "esse anime não tem fim não?!",
+             "isso do lado dele é um chiclete?!", "como ele sempre ganha é um enigma", "não se parece com a minha escola", "knockout",
+             "esse campo é infinito?!", "vi e achei o principal bonito e formidavel", "capital", "ao encontro do mais forte",
+             "belas armaduras!! ou fantasias?!", "to 'sem' saber essa, voce sabe?", "Não era só tirar o capacete?", "aquilo é o avo dele?!",
+             "é aquele filme da disney?! bem parecido ne?!", "é o anime do Eric do Caverna do Dragão?!", "copia do pokemon!! não cara não é!!",
+             "ele entrou pela tela do fliperama?! que louco!!", "Mas ele só mata isso? Só!", "é o fim do Thor!!", "Acho que diminuiria os crimes!! mas e nossa privacidade?!",
+             "isso é rinha de robo!!", "aquilo ali não é o monte rushmore?!", "rapaz, eles zoam os animes tudo!!", "O caminho é longo!! mas a vista vale o esforço!!", "cheaters!!",
+             "levanta pra mim?!", "-", "gloria!! gloria a Deus!!", "vamos todos levantar as mãos", "meu avo disse que jogava isso na rua quando criança", "então quer dizer que eles não morrem",
+             "o amor nem sempre é facil", "rapaz, isso sim é uma dungeon", "ok, depois que fugirem eles vão pra onde?!", "seguuura peão!! no futuro cara, segurará peão!!",
+             "é um amor um tanto quanto inusitado?!", "melhor ser o mestre ou o jogador?!", "-", "deve ter sido uma medusa?!", "são espiritas!! certeza!!", "Tem 4 ali, tenho certeza!!! Tem??",
+             "ainda bem que o vestibular não é assim", "peladinha de leve", "com esse transformer ate eu!!", "deu um branco aqui!! vamos pra próxima!", "menino famoso", "porrada!!",
+             "muita porrada!!", "-", "que gracinha quero um pra mim!!", "então ela é uma colecionadora compulsiva?!", "com a maxima venia eu peço excusas!!",
+             "não faz parte da obra original!! mas a musica é boa!!", "para o amor não há barreiras", "-", "posso dar uma pista!!", "ja vi vendendo essas bolinhas por ae!! são monstros cara!!",
+             "olha, pelo nome deve ser porno!!", "-", "-", "esse sofreu!! sofreu muito!!", "saia desse corpo que não te pertence!!", "Jax do mortal kombate devia lutar isso ae!!", "-", "-", "-",
+             "que delicia!!", "-", "-", "-", "-", "como ele aguenta segurar essa espada?!", "a vida deles seria mais facil com um Squirtle!!", "-", "minha namorada 'adora'", "Cara, aquilo na mão dele é um olho?!",
+             "O anime mais politico do universo!!", "adoro vinho!! Ey, pera ae, isso não é vinho!!", "lol é melhor!! opinião" ]
+    cont = 0
+    for listar in listarmusicas:
+        listar.dica = dicas[cont]
+        cont += 1
+        listar.save()
     return redirect('listarmusicas')

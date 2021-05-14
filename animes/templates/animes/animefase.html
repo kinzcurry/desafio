@@ -20,67 +20,95 @@
     <div>
         <span class="align-middle" style="font-size: 200%; color: #black; margin: 10%;"> Dicas </span>
             <br>
-        <span class="align-middle" style="font-size: 200%; color: #black; margin: 10%;"> {{achardica}} </span>
+        <span id="pontodica" class="align-middle" style="font-size: 200%; color: #black; margin: 10%;"> {{achardica}} </span>
     </div>
     <div>
         <span style="margin-left:10%;"> {{temamaisculo}} Musical </span>
     </div>
 </div>
 
-<div class="wrapper">
+<section class="flex">
+    {% for musica in musicas %}
+      <div class="carta">
+          {% for lis in lista %}
+            {% if musica == lis.respostas_lista %}
+                {% if lis.acertou %}
+          <button style="background-image: linear-gradient(to right, #E7DFC6, #E9F1F7); color: black;" type="submit" disabled> Referência</button>
+        <div class="mover">
+          <div class="autoria">
+            <br>
+            <span class="escondida" style="color: white;"> Música, composta por:</span>
+            <br>
+            <span class="escondida"> {{musica.info}}</span>
+          </div>
+          <img class="imagemove" src="{{musica.imagem.url}}">
+        </div>
+        <audio controls controlsList="nodownload"> <source src="{{ musica.musica.url }}" type="audio/mp3"> </audio>
+        <form action="{% url 'validar' lis.id %}" method="get">
+            {% if lis.id == focus %}
+            <input style="color: white;" type="text" disabled placeholder="{{musica}}" autofocus>
+            {% else%}
+            <input style="color: white;" type="text" disabled placeholder="{{musica}}">
+            {% endif %}
+          <br>
+          <button disabled> Validar</button>
+        </form>
+<!--          else se acertou ou não-->
+            {%else%}
+          {% if lis.usou_dica %}
+      <div class="carta">
+        <form action="{% url 'dica' lis.id%}">
+            <button style="background-image: linear-gradient(to right, #E7DFC6, #E9F1F7); color: black;" type="submit" disabled> Dica abaixo </button>
+        </form>
+          <div class="mover">
+              <div class="autoria">
+                <br>
+                <span class="escondida" style="color: white;"> Dica:</span>
+                <br>
+                <span class="escondida"> {{musica.dica}}</span>
+              </div>
+              <img sstyle="margin-top: 0px; padding-top: 0px;" class="imagecomdica" src="/media/media/controle.png">
+            </div>
+        </div>
+        <audio controls controlsList="nodownload"> <source src="{{ musica.musica.url }}" type="audio/mp3"> </audio>
+        <form action="{% url 'validar' lis.id %}" method="get" >
+            {% if lis.id == focus %}
+        <input name="escrito" type="text" autofocus>
+            {% else%}
+            <input name="escrito" type="text">
+            {% endif %}
+          <br>
+          <button type="submit"> Validar</button>
+        </form>
+      </div>
+<!--          Else do se usou dica-->
+          {% else %}
+          <div class="carta">
+        <form style="margin-bottom: 0px; padding-bottom: 0px;" action="{% url 'dica' lis.id%}">
+            <button style="background-image: linear-gradient(to right, #E7DFC6, #E9F1F7); color: black;" type="submit"> Dica</button>
+        </form>
+            <img style="margin-top: 0px; padding-top: 0px;" class="comum" src="/media/media/controle.png">
+        <audio controls controlsList="nodownload"> <source src="{{ musica.musica.url }}" type="audio/mp3"> </audio>
 
-    <ul class="grid cards">
-        {% for music in musicas %}
-            <li>
-                {% for lis in lista %}
-                {% if music == lis.respostas_lista %}
-                    {% if lis.acertou %}
-                <img  class="imagem" src="{{music.imagem.url}}">
-                    {% else %}
-                <img class="imagem" src="/media/media/controle.png">
-                    {% endif %}
-                <audio class="audiotamanho" controls controlsList="nodownload">
-                   <source src="{{ music.musica.url }}" type="audio/mp3">
-                </audio>
-                <form action="{% url 'validar' lis.id %}" method="get" >
-                    {% if lis.acertou %}
-                    <input style="width:100%;" type="text" disabled placeholder="{{music}}">
-                    <button style="width:100%;" disabled> Validar</button>
-                    {% else %}
-                    <input name="escrito" style="width:100%;" type="text">
-                    <button style="width:100%; background-color: #AFD2E9; color: black;"> Validar</button>
-                    {% endif %}
-                </form>
-                <button id="{{music.id}}" onclick="teste(this.id)" value="{{music.dica}}" style="width:100%; background-color: #AFD2E9; color: black;"> Dica </button>
-                {% endif %}
-        {% endfor %}
+        <form action="{% url 'validar' lis.id %}" method="get" >
+            {% if lis.id == focus %}
+        <input name="escrito" type="text" autofocus>
+            {% else%}
+            <input name="escrito" type="text">
+            {% endif %}
+          <br>
+          <button type="submit"> Validar</button>
+        </form>
+      </div>
+          {% endif %}
+            {% endif %}
+          {% endif %}
+          {% endfor %}
+      </div>
+    {% endfor %}
+</section>
 
-      </li>
-        {% endfor %}
-        <li style="width: 100%; height: 100%;">
-            <a href="{% url 'animefase' num=ante focus='1' %}">
-            <img style="width: 100%;" src="/media/media/capas/seta.png">
-            </a>
-        </li>
-        <li style="width: 100%; height: 100%;">
-            <span > Fase atual</span>
-        </li>
-        <li style="width: 100%; height: 100%;">
-    {% if podepassar %}
-     <a href="{% url 'animefase' num=prox focus='1' %}">
-        <img style="width: 100%; -moz-transform: scaleX(-1);
-        -o-transform: scaleX(-1);
-        -webkit-transform: scaleX(-1);
-    transform: scaleX(-1); float: right;" src="/media/media/capas/seta.png">
-     </a>
-    {% else %}
-    <a href="">
-        <img style="width: 100%;" src="/media/media/capas/setabloqueada.png">
-    </a>
-    </li>
-    {% endif %}
-    </ul>
-</div>
 
 <script src="{% static 'js/focus.js' %}"></script>
+
 {% endblock %}
