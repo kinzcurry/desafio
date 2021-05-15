@@ -225,8 +225,10 @@ def proxfase(request, pontotema, num):
 
 # Calcula a quantidade de dicas do jogador
 def qtddica(request, user, tema):
+    print("entrou")
     dicas = UserDicas.objects.filter(usuario__username__iexact=user, fase=tema)
     for dica in dicas:
+        print(dica)
         return dica.qtd_dicas
 
 # Gera a fase de jogo
@@ -242,6 +244,7 @@ def animefase(request, num, focus):
     pontotema, pontofase = pontosjogador(request, num, tema)
     podepassar = proxfase(request, pontotema, num)
     achardica = qtddica(request, user, tema)
+    print(achardica)
     return render(request, 'animes/animefase.html',
                   {'musicas': musicas, 'lista': lista, 'pontofase': pontofase, 'pontotema': pontotema,
                    'podepassar': podepassar,
@@ -254,7 +257,8 @@ def dica(request, musica_id):
     focus = musica_id
     # Esse num é a fase, para poder passar o id que ficará com o focus
     num = musicas.respostas_lista.fase
-    quantidade = UserDicas.objects.filter(usuario__username__iexact=user)
+    tema = musicas.respostas_lista.tipo
+    quantidade = UserDicas.objects.filter(usuario__username__iexact=user, fase=tema)
     for quant in quantidade:
         if quant.qtd_dicas > 0:
             if not musicas.usou_dica:

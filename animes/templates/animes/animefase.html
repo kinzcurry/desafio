@@ -33,16 +33,12 @@
           {% for lis in lista %}
             {% if musica == lis.respostas_lista %}
                 {% if lis.acertou %}
-          <button style="background-image: linear-gradient(to right, #E7DFC6, #E9F1F7); color: black;" type="submit" disabled> Referência</button>
-        <div class="mover">
-          <div class="autoria">
-            <br>
-            <span class="escondida" style="color: white;"> Música, composta por:</span>
-            <br>
+          <button class="hoverme" style="background-image: linear-gradient(to right, #E7DFC6, #E9F1F7); color: black;" type="submit" disabled> Referência</button>
+          <div class="mover">
+            <img style="margin-top: 0px; padding-top: 0px;" class="imagecomdica" src="{{musica.imagem.url}}">
             <span class="escondida"> {{musica.info}}</span>
           </div>
-          <img class="imagemove" src="{{musica.imagem.url}}">
-        </div>
+
         <audio controls controlsList="nodownload"> <source src="{{ musica.musica.url }}" type="audio/mp3"> </audio>
         <form action="{% url 'validar' lis.id %}" method="get">
             {% if lis.id == focus %}
@@ -61,15 +57,9 @@
             <button style="background-image: linear-gradient(to right, #E7DFC6, #E9F1F7); color: black;" type="submit" disabled> Dica abaixo </button>
         </form>
           <div class="mover">
-              <div class="autoria">
-                <br>
-                <span class="escondida" style="color: white;"> Dica:</span>
-                <br>
-                <span class="escondida"> {{musica.dica}}</span>
-              </div>
-              <img sstyle="margin-top: 0px; padding-top: 0px;" class="imagecomdica" src="/media/media/controle.png">
-            </div>
-        </div>
+            <img style="margin-top: 0px; padding-top: 0px;" class="imagecomdica" src="/media/media/controle.png">
+            <span class="escondida"> {{musica.dica}}</span>
+          </div>
         <audio controls controlsList="nodownload"> <source src="{{ musica.musica.url }}" type="audio/mp3"> </audio>
         <form action="{% url 'validar' lis.id %}" method="get" >
             {% if lis.id == focus %}

@@ -58,14 +58,19 @@ form{
 
 }
 
+.mover{
+    position: relative;
+}
 .mover .autoria{
    position: relative;
-   margin-top: 0;
+   top: -100%;
    z-index: 2;
-  font-size: 10px;
+   font-size: 10px;
 }
+
 .mover .imagemove{
   position: relative;
+  display: inline-block;
   margin-top: -30.5%;
   z-index: 21;
   border-radius: 10%;
@@ -83,21 +88,18 @@ form{
    z-index: 2;
   font-size: 10px;
 }
-.mover .dicaescondida{
 
-}
 .mover .imagecomdica{
   position: relative;
-  margin-top: -30.5%;
   z-index: 5;
   border-radius: 10%;
-  transition-duration: .3s;
+  transition-duration: .5s;
   transition-timing-function: cubic-bezier(.10,.30,.30,.10);
 }
 
-.mover .imagecomdica:hover {
+.mover:hover .imagecomdica {
   z-index: 10;
-  transform: translatey(30%);
+  transform: translatey(70%);
 }
 
 .comum{
@@ -119,3 +121,20 @@ form{
     margin-bottom: 20px;
 }
 
+.mover .escondida{
+    position: absolute;
+    display: flex;
+    color: white;
+    font-size: 14px;
+    top: 30%;
+    left:42%;
+    -webkit-transform:translate3d(-50%, -50%, 0);
+    -moz-transform:translate3d(-50%, -50%, 0);
+    transform:translate3d(-50%, -50%, 0);
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
